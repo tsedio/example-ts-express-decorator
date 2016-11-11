@@ -1,0 +1,16 @@
+{
+  "name": "test-ts-express-decorator",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@types/node": "^6.0.38",
+    "ts-express-decorators": "file:///Users/romakita/workspace/ts-express-decorators",
+    "typescript": "^2.0.2"
+  }
+}

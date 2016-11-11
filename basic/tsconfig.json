@@ -1,17 +1,14 @@
 {
   "compilerOptions": {
-    "module": "commonjs",
     "target": "es5",
-    "noImplicitAny": false,
-    "sourceMap": true,
-    "declaration":false,
+    "lib": ["es6", "dom"],
+    "types": ["reflect-metadata"],
+    "module": "commonjs",
+    "moduleResolution": "node",
     "experimentalDecorators":true,
     "emitDecoratorMetadata": true,
-    "moduleResolution": "node",
-    "isolatedModules": false,
-    "noLib": false,
-    "suppressImplicitAnyIndexErrors": false,
-    "lib": ["es6","dom"]
+    "sourceMap": true,
+    "declaration": false
   },
   "exclude": [
     "node_modules"

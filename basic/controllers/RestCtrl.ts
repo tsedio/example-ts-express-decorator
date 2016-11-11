@@ -1,4 +1,4 @@
-import {Controller, All, RouteService} from "ts-express-decorators";
+import {Controller, All, Get, RouteService} from "ts-express-decorators";
 import {$log} from "ts-log-debug";
 
 @Controller("/rest")
@@ -19,7 +19,7 @@ export class RestCtrl {
     @Get('/')
     public getRoutes(){
 
-        return JSON.stringify(this.routeService.getRoutes());
+        return this.routeService.getAll();
 
     }
 }

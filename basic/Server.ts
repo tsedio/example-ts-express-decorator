@@ -31,7 +31,7 @@ export class Server extends ServerLoader {
      * This method let you configure the middleware required by your application to works.
      * @returns {Server}
      */
-    public importMiddlewares(): ExampleServer {
+    public importMiddlewares(): Server {
         let morgan = require('morgan'),
             cookieParser = require('cookie-parser'),
             bodyParser = require('body-parser'),
@@ -83,7 +83,7 @@ export class Server extends ServerLoader {
 
         $log.info('Initialize server');
 
-        return new ExampleServer()
+        return new Server()
             .start()
             .then(() => {
                 $log.info('Server started...');

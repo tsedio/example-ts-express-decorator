@@ -1,4 +1,6 @@
-
-import {Server} from "./ExampleServer";
+/**
+ * Test
+ */
+import {Server} from "./Server";
 
 Server.Initialize();

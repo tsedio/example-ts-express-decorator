@@ -6,7 +6,11 @@ interface IEvent{
 
 @Controller("/events")
 export default class EventCtrl implements ICrud<IEvent> {
-
+    /**
+     *
+     * @param response
+     * @returns {null}
+     */
     @Get('/:id')
     find(
         @Response() response: any
@@ -17,6 +21,10 @@ export default class EventCtrl implements ICrud<IEvent> {
         return null;
     }
 
+    /**
+     *
+     * @returns {null}
+     */
     @Put('/')
     save(
 
@@ -27,6 +35,10 @@ export default class EventCtrl implements ICrud<IEvent> {
         return null;
     }
 
+    /**
+     *
+     * @returns {null}
+     */
     @Post('/:id')
     update(
 
@@ -36,6 +48,9 @@ export default class EventCtrl implements ICrud<IEvent> {
         return null;
     }
 
+    /**
+     *
+     */
     @Delete('/:id')
     remove(
 

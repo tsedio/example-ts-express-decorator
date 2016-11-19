@@ -19,7 +19,6 @@ export class Server extends ServerLoader {
         let appPath = Path.resolve(__dirname);
         
         this.setEndpoint('/rest')
-            .scan(appPath + "/services/**/**.js")
             .scan(appPath + "/controllers/**/**.js")
             .createHttpServer(8000)
             .createHttpsServer({

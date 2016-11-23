@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "baseUrl":".",
     "target": "es5",
     "lib": ["es6", "dom"],
     "types": ["reflect-metadata"],
@@ -8,7 +9,13 @@
     "experimentalDecorators":true,
     "emitDecoratorMetadata": true,
     "sourceMap": true,
-    "declaration": false
+    "declaration": false,
+    "paths":{
+      "ts-express-decorators/testing": [
+        "node_modules/ts-express-decorators/dts/testing",
+        "node_modules/ts-express-decorators/lib/testing"
+      ]
+    }
   },
   "exclude": [
     "node_modules"

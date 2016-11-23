@@ -3,7 +3,6 @@ import {
 } from "ts-express-decorators";
 
 import {$log} from "ts-log-debug";
-import * as Promise from "bluebird";
 import * as Express from "express";
 import {NotFound} from "ts-httpexceptions";
 import EventCtrl from './EventCtrl';

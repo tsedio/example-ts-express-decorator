@@ -1,6 +1,5 @@
 
 import * as Express from "express";
-import * as Bluebird from "bluebird";
 import {$log} from "ts-log-debug";
 import {ServerLoader} from "ts-express-decorators";
 import Path = require("path");
@@ -80,7 +79,7 @@ export class Server extends ServerLoader {
      * Start your server. Enjoy it !
      * @returns {Promise<U>|Promise<TResult>}
      */
-    static Initialize(): Bluebird<any> {
+    static Initialize(): Promise<any> {
 
         $log.info('Initialize server');
 

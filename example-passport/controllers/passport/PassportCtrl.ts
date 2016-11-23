@@ -3,7 +3,6 @@
 import {NotFound} from "ts-httpexceptions";
 import * as Express from "express";
 import Events = require('events');
-import * as Promise from "bluebird";
 import EventEmitter = NodeJS.EventEmitter;
 import {Controller, Get, Post, BodyParams, Required, Request, Response, Next} from "ts-express-decorators";
 import PassportLocalService from '../../services/PassportLocalService';

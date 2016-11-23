@@ -1,6 +1,5 @@
 
 import * as Express from "express";
-import * as Bluebird from "bluebird";
 import {$log} from "ts-log-debug";
 import {ServerLoader} from "ts-express-decorators";
 import Path = require("path");

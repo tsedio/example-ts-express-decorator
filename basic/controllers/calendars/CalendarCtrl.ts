@@ -6,7 +6,6 @@ import {
 } from "ts-express-decorators";
 
 import {$log} from "ts-log-debug";
-import * as Promise from "bluebird";
 import * as Express from "express";
 import EventCtrl from './EventCtrl';
 

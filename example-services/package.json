@@ -26,7 +26,8 @@
     "method-override": "^2.3.6",
     "morgan": "^1.7.0",
     "node-uuid": "^1.4.7",
-    "ts-express-decorators": "1.1.0",
+    "ts-express-decorators": "1.2.0-2",
+    "ts-express-decorators/testing": "1.2.0-2",
     "typescript": "^2.0.2"
   },
   "devDependencies": {

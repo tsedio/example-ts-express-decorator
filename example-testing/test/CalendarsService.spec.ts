@@ -1,0 +1,1 @@
+import {inject} from "ts-express-decorators/testing";

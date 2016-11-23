@@ -3,15 +3,11 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "scripts": {
-
-  },
+  "scripts": {},
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "ts-express-decorators": "1.1.0"
+    "ts-log-debug": "^2.1.1-0"
   },
-  "devDependencies": {
-
-  }
+  "devDependencies": {}
 }

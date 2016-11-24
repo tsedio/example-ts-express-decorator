@@ -1,4 +1,4 @@
-import {Controller, Get, Post, Put, Delete, Response, ICrud, IPromise} from "ts-express-decorators";
+import {Controller, Get, Post, Put, Delete, Response, ICrud, IPromise, Authenticated} from "ts-express-decorators";
 
 interface IEvent{
     id: string;
@@ -13,6 +13,7 @@ export default class EventCtrl implements ICrud<IEvent> {
      * @returns {null}
      */
     @Get('/:id')
+    @Authenticated()
     find(
         @Response() response: any
     ): IPromise<IEvent> | void {
@@ -27,6 +28,7 @@ export default class EventCtrl implements ICrud<IEvent> {
      * @returns {null}
      */
     @Put('/')
+    @Authenticated()
     save(
 
     ): IPromise<any> | void {
@@ -41,6 +43,7 @@ export default class EventCtrl implements ICrud<IEvent> {
      * @returns {null}
      */
     @Post('/:id')
+    @Authenticated()
     update(
 
     ): IPromise<any> | void {
@@ -53,6 +56,7 @@ export default class EventCtrl implements ICrud<IEvent> {
      *
      */
     @Delete('/:id')
+    @Authenticated()
     remove(
 
     ): IPromise<any> | void {
@@ -60,6 +64,7 @@ export default class EventCtrl implements ICrud<IEvent> {
     }
 
     @Get('/')
+    @Authenticated()
     query(
 
     ): IPromise<any[]> | void {

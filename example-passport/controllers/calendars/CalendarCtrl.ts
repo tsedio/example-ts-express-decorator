@@ -1,10 +1,7 @@
 import {
-    Controller, ICrud, Get, PathParams, Post, BodyParams, Put
+    Controller, Authenticated, Get, PathParams, Post, BodyParams, Put
 } from "ts-express-decorators";
 
-import {$log} from "ts-log-debug";
-import * as Promise from "bluebird";
-import * as Express from "express";
 import {NotFound} from "ts-httpexceptions";
 import EventCtrl from './EventCtrl';
 import CalendarsService from '../../services/CalendarsService';
@@ -28,6 +25,7 @@ export default class CalendarCtrl {
     }
 
     @Get('/:id')
+    @Authenticated()
     find(
         @PathParams('id') id: string
     ): ICalendar {
@@ -44,6 +42,7 @@ export default class CalendarCtrl {
     }
 
     @Post('/')
+    @Authenticated()
     save(
         @BodyParams('name') name: string
     ) {
@@ -51,6 +50,7 @@ export default class CalendarCtrl {
     }
 
     @Put('/:id')
+    @Authenticated()
     update(
         @PathParams('id') id: string,
         @BodyParams('name') name: string
@@ -59,6 +59,7 @@ export default class CalendarCtrl {
     }
 
     @Get('/')
+    @Authenticated()
     query(
 
     ) {

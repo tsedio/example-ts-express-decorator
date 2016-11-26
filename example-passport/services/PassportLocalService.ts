@@ -13,7 +13,7 @@ export default class PassportLocalService {
         Passport.serializeUser(PassportLocalService.serialize);
 
         // used to deserialize the user
-        Passport.deserializeUser(this.deserialize);
+        Passport.deserializeUser(this.deserialize.bind(this));
     }
 
     /**
@@ -30,10 +30,8 @@ export default class PassportLocalService {
      * @param id
      * @param done
      */
-    public deserialize = (id, done) => {
-
-        done(this.usersService.find(id));
-
+    public deserialize(id, done) {
+        done(null, this.usersService.find(id));
     };
 
     // =========================================================================

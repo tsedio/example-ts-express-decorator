@@ -78,7 +78,7 @@ export class Server extends ServerLoader {
      * Start your server. Enjoy it !
      * @returns {Promise<U>|Promise<TResult>}
      */
-    static Initialize(): Bluebird<any> {
+    static Initialize(): Promise<any> {
 
         $log.info('Initialize server');
 

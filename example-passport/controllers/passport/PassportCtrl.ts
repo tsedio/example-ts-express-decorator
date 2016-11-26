@@ -35,6 +35,7 @@ class PassportCtrl{
         @Response() response: Express.Response,
         @Next() next: Express.NextFunction
     ) {
+        console.log('resquest.cookies', request.cookies);
 
         return new Promise<IUser>((resolve, reject) => {
 

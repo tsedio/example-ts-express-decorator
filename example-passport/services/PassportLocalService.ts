@@ -31,10 +31,7 @@ export default class PassportLocalService {
      * @param done
      */
     public deserialize(id, done) {
-
-        console.log(this);
         done(null, this.usersService.find(id));
-
     };
 
     // =========================================================================

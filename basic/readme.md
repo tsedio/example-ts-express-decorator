@@ -2,7 +2,7 @@
 
 Here an example to configure your server and how to create your first controller.
 
-See [TsExpressDecortars](https://github.com/Romakita/ts-express-decorators) project for more information.
+See [TsExpressDecorators](https://github.com/Romakita/ts-express-decorators) project for more information.
 
 ## Install
 

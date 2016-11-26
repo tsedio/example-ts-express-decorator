@@ -2,7 +2,7 @@
 
 Here an example with a Express Server using `Service` and `Passport.js`.
 
-See [TsExpressDecortars](https://github.com/Romakita/ts-express-decorators) project for more information.
+See [TsExpressDecorators](https://github.com/Romakita/ts-express-decorators) project for more information.
 
 ## Install
 

@@ -1,13 +1,13 @@
 
 import * as Express from "express";
 import {$log} from "ts-log-debug";
-import {ServerLoader} from "ts-express-decorators";
+import {ServerLoader, IServerLifecycle} from "ts-express-decorators";
 import Path = require("path");
 
 /**
  * Create a new Server that extends ServerLoader.
  */
-export class Server extends ServerLoader {
+export class Server extends ServerLoader implements IServerLifecycle {
     /**
      * In your constructor set the global endpoint and configure the folder to scan the controllers.
      * You can start the http and https server.
@@ -18,7 +18,6 @@ export class Server extends ServerLoader {
         let appPath = Path.resolve(__dirname);
         
         this.setEndpoint('/rest')
-            .scan(appPath + "/services/**/**.js")
             .scan(appPath + "/controllers/**/**.js")
             .createHttpServer(8000)
             .createHttpsServer({
@@ -31,26 +30,28 @@ export class Server extends ServerLoader {
      * This method let you configure the middleware required by your application to works.
      * @returns {Server}
      */
-    public importMiddlewares(): Server {
-        let morgan = require('morgan'),
+    $onMountingMiddlewares(): void|Promise<any> {
+
+        const morgan = require('morgan'),
             cookieParser = require('cookie-parser'),
             bodyParser = require('body-parser'),
             compress = require('compression'),
-            methodOverride = require('method-override'),
-            session = require('express-session');
+            methodOverride = require('method-override');
+
 
         this
-            //.use(morgan('dev'))
+            .use(morgan('dev'))
             .use(ServerLoader.AcceptMime("application/json"))
+
+            .use(cookieParser())
+            .use(compress({}))
+            .use(methodOverride())
             .use(bodyParser.json())
             .use(bodyParser.urlencoded({
                 extended: true
-            }))
-            .use(cookieParser())
-            .use(compress({}))
-            .use(methodOverride());
+            }));
 
-        return this;
+        return null;
     }
 
     /**
@@ -60,21 +61,21 @@ export class Server extends ServerLoader {
      * @param response
      * @param next
      */
-    public onError(error: any, request: Express.Request, response: Express.Response, next: Express.NextFunction): any {
-        return super.onError(error, request, response, next);
+    $onError(error: any, request: Express.Request, response: Express.Response, next: Express.NextFunction): void {
+
+        if (response.headersSent) {
+            return next(error);
+        }
+
+        // MONGOOSE ERROR MANAGEMENT
+        if (error.name === "CastError" || error.name === "ObjectID" || error.name === "ValidationError") {
+            response.status(400).send("Bad Request");
+            return next();
+        }
+
+        next(error);
     }
 
-    /**
-     * Set here your check authentification strategy.
-     * @param request
-     * @param response
-     * @param next
-     * @returns {boolean}
-     */
-    public isAuthenticated(request: Express.Request, response: Express.Response, next: Express.NextFunction): boolean {
-
-        return request.get("authorization") === "token";
-    }
     /**
      * Start your server. Enjoy it !
      * @returns {Promise<U>|Promise<TResult>}

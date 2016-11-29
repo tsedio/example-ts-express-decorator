@@ -41,3 +41,7 @@ jspm_packages
 *.js
 *.js.map
 .idea/
+/example-mongoose/.idea/
+.DS_Store
+example-passport/.DS_Store
+example-passport/controllers/.DS_Store

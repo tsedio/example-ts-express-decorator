@@ -1,0 +1,14 @@
+{
+  "test": {
+    "host": "localhost",
+    "name": "example-mongoose-test"
+  },
+  "development": {
+    "host": "localhost",
+    "name": "example-mongoose-dev"
+  },
+  "production": {
+    "host": "localhost",
+    "name": "example-mongoose-prod"
+  }
+}

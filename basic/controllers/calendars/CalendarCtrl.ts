@@ -24,6 +24,8 @@ interface ICalendar {
 @Controller("/calendars", EventCtrl)
 export default class CalendarCtrl {
 
+    //@JsonProperty()
+    attributs: Map<string, string> = new Map<string, string>();
     /**
      * Example of classic call. Use `@Get` for routing a request to your method.
      * In this case, this route "/calendar/classic/:id" are mounted on the "rest/" path (call /rest/calendar/classic/:id

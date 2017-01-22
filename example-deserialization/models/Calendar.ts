@@ -1,21 +1,43 @@
 
-import {Document, model, Schema} from 'mongoose';
+import {model, Schema} from 'mongoose';
+import {JsonProperty} from 'ts-express-decorators';
 
-export const schema = new Schema({
-    name:{
-        type:String,
-        required:true
-    }
+export const CalendarSchema = new Schema({
+    name: {
+        type: String,
+        required: "Calendar name are required"
+    },
+
+    dateCreated: {
+        type: Date,
+        default: Date.now
+    },
+
+    events: [{
+        type: Schema.Types.ObjectId,
+        ref: 'Event'
+    }]
 });
 
-export interface ICalendar {
+export const CalendarModel = model<any>('Calendar', CalendarSchema);
+
+/**
+ *
+ */
+export default class Calendar {
+
+    @JsonProperty('id')
     _id: string;
+
+    @JsonProperty('name')
     name: string;
+
+    @JsonProperty()
+    dateCreate: Date = new Date();
+
+    @JsonProperty()
+    events: string[];
 }
 
-export interface ICalendar extends Document {
-    name: string
-}
 
 
-export const Calendar = model<ICalendar>('Calendar', schema);

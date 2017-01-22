@@ -4,7 +4,7 @@ import {
 
 import EventCtrl from './EventCtrl';
 import CalendarsService from '../../services/CalendarsService';
-import {ICalendar} from '../../models/Calendar';
+import Calendar from '../../models/Calendar';
 
 /**
  * Add @Controller annotation to declare your class as Router controller.
@@ -27,25 +27,25 @@ export default class CalendarCtrl {
     @Authenticated()
     find(
         @PathParams('id') id: string
-    ): Promise<ICalendar> {
+    ): Promise<Calendar> {
         return this.calendarsService.find(id);
     }
 
     @Post('/')
     @Authenticated()
     save(
-        @BodyParams('name') name: string
+        @BodyParams() calendar: Calendar
     ) {
-        return this.calendarsService.create(name);
+        return this.calendarsService.create(calendar);
     }
 
     @Put('/:id')
     @Authenticated()
     update(
         @PathParams('id') id: string,
-        @BodyParams('name') name: string
+        @BodyParams() calendar: Calendar
     ) {
-        return this.calendarsService.update(<ICalendar>{_id: id, name: name});
+        return this.calendarsService.update(calendar);
     }
 
     @Get('/')

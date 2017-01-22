@@ -1,41 +1,37 @@
-import {Controller, Get, Post, Put, Delete, Response, ICrud, IPromise, Authenticated} from "ts-express-decorators";
+import {
+    Controller, Get, Post, Put, Delete, Response, Authenticated, PathParams,
+    BodyParams
+} from "ts-express-decorators";
 
-interface IEvent{
-    id: string;
-}
+import EventsService from '../../services/EventsService';
+import CalendarEvent from '../../models/Event';
 
 @Controller("/events")
-export default class EventCtrl implements ICrud<IEvent> {
+export default class EventCtrl {
 
-    /**
-     *
-     * @param response
-     * @returns {null}
-     */
-    @Get('/:id')
-    @Authenticated()
-    find(
-        @Response() response: any
-    ): IPromise<IEvent> | void {
+    constructor(private eventsService: EventsService) {
 
-        response.send(200, 'OK');
-
-        return null;
     }
 
     /**
-     *
+     * Find an event by his id
+     * @returns {null}
+     * @param id
+     */
+    @Get('/:id')
+    @Authenticated()
+    find(@PathParams('id') id: string): Promise<CalendarEvent> {
+        return this.eventsService.find(id);
+    }
+
+    /**
+     * Create a new event for a calendar.
      * @returns {null}
      */
     @Put('/')
     @Authenticated()
-    save(
-
-    ): IPromise<any> | void {
-
-
-
-        return null;
+    create(@BodyParams() event: CalendarEvent): Promise<CalendarEvent> {
+        return this.eventsService.create(event);
     }
 
     /**
@@ -44,31 +40,20 @@ export default class EventCtrl implements ICrud<IEvent> {
      */
     @Post('/:id')
     @Authenticated()
-    update(
-
-    ): IPromise<any> | void {
-
-
-        return null;
+    update(@BodyParams() event: CalendarEvent): Promise<CalendarEvent> {
+        return this.eventsService.update(event);
     }
 
-    /**
-     *
-     */
+
     @Delete('/:id')
     @Authenticated()
-    remove(
-
-    ): IPromise<any> | void {
+    remove(): Promise<any> {
         return null;
     }
 
     @Get('/')
     @Authenticated()
-    query(
-
-    ): IPromise<any[]> | void {
-
-        return null;
+    query(@BodyParams('calendarId') calendarId): Promise<CalendarEvent[]> {
+        return this.eventsService.query(calendarId);
     }
 }

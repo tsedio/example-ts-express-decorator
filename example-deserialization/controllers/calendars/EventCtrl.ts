@@ -21,6 +21,7 @@ export default class EventCtrl {
     @Get('/:id')
     @Authenticated()
     find(@PathParams('id') id: string): Promise<CalendarEvent> {
+
         return this.eventsService.find(id);
     }
 

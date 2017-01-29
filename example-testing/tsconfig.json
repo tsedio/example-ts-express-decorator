@@ -16,8 +16,8 @@
     "declaration": false,
     "paths":{
       "ts-express-decorators/testing": [
-        "node_modules/ts-express-decorators/dts/testing",
-        "node_modules/ts-express-decorators/lib/testing"
+        "../node_modules/ts-express-decorators/dts/testing",
+        "../node_modules/ts-express-decorators/lib/testing"
       ]
     }
   },

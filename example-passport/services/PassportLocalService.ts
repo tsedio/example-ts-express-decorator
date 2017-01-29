@@ -16,6 +16,14 @@ export default class PassportLocalService {
         Passport.deserializeUser(this.deserialize.bind(this));
     }
 
+    middlewareInitialize() {
+        return Passport.initialize();
+    }
+
+    middlewareSession(options?) {
+        return Passport.session(options);
+    }
+
     /**
      *
      * @param user

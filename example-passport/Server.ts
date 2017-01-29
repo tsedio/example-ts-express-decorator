@@ -1,8 +1,9 @@
 
 import * as Express from "express";
 import {$log} from "ts-log-debug";
-import {ServerLoader, IServerLifecycle} from "ts-express-decorators";
+import {ServerLoader, IServerLifecycle, Inject} from "ts-express-decorators";
 import Path = require("path");
+import PassportLocalService from "./services/PassportLocalService";
 
 /**
  * Create a new Server that extends ServerLoader.
@@ -17,8 +18,7 @@ export class Server extends ServerLoader implements IServerLifecycle {
 
         let appPath = Path.resolve(__dirname);
         
-        this.setEndpoint('/rest')
-            .scan(appPath + "/controllers/**/**.js")
+        this.mount('/rest', appPath + "/controllers/**/**.js")
             .scan(appPath + "/services/**/**.js")
             .createHttpServer(8000)
             .createHttpsServer({
@@ -31,7 +31,8 @@ export class Server extends ServerLoader implements IServerLifecycle {
      * This method let you configure the middleware required by your application to works.
      * @returns {Server}
      */
-    $onMountingMiddlewares(): void|Promise<any> {
+    @Inject()
+    $onMountingMiddlewares(passportService: PassportLocalService): void|Promise<any> {
 
         const morgan = require('morgan'),
             cookieParser = require('cookie-parser'),
@@ -45,7 +46,6 @@ export class Server extends ServerLoader implements IServerLifecycle {
         this
             .use(morgan('dev'))
             .use(ServerLoader.AcceptMime("application/json"))
-
             .use(cookieParser())
             .use(compress({}))
             .use(methodOverride())
@@ -68,8 +68,8 @@ export class Server extends ServerLoader implements IServerLifecycle {
                 }
             }))
             // Configure passport JS
-            .use(passport.initialize())
-            .use(passport.session());
+            .use(passportService.middlewareInitialize())
+            .use(passportService.middlewareSession());
 
         return null;
     }

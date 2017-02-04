@@ -11,7 +11,6 @@ describe('CalendarsService:', () => {
 
             expect(calendarsService).to.be.an.instanceof(CalendarsService);
 
-
         }
     ));
 });

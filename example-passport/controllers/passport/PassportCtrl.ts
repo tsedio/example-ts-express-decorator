@@ -10,7 +10,7 @@ import {IUser} from '../../services/UsersService';
 import * as Passport from 'passport';
 
 @Controller("/passport")
-class PassportCtrl{
+export class PassportCtrl{
 
     constructor(
         private passportLocalService: PassportLocalService
@@ -39,27 +39,24 @@ class PassportCtrl{
 
         return new Promise<IUser>((resolve, reject) => {
 
-            try{
-                Passport
-                    .authenticate('login', (err, user: IUser) => {
+            Passport
+                .authenticate('login', (err, user: IUser) => {
+
+                    if (err) {
+                        reject(err);
+                    }
+
+                    request.logIn(user, (err) => {
 
                         if (err) {
                             reject(err);
                         }
 
-                        request.logIn(user, (err) => {
+                        resolve(user);
+                    });
 
-                            if (err) {
-                                reject(err);
-                            }
+                })(request, response, next);
 
-                            resolve(user);
-                        });
-
-                    })(request, response, next);
-            }catch (er){
-                console.error(er);
-            }
         })
             .catch((err) => {
 

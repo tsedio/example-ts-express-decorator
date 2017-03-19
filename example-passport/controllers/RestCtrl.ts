@@ -9,12 +9,6 @@ export class RestCtrl {
     ) {
 
     }
-    
-    @All('/')
-    public all() {
-        $log.debug("Route ALL /rest");
-    }
-
 
     @Get('/')
     public getRoutes(){

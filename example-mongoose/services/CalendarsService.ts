@@ -1,21 +1,17 @@
-
 import {Service} from "ts-express-decorators";
-import MemoryStorage from './MemoryStorage';
-import {Calendar, ICalendar} from '../models/Calendar';
+import {Calendar, ICalendar} from "../models/Calendar";
 
 @Service()
-export default class CalendarsService {
+export class CalendarsService {
 
-    constructor(
-
-    ) {
+    constructor() {
 
         Calendar
             .find({})
             .exec()
-            .then((calendars) =>{
-                if(calendars.length === 0) {
-                    Calendar.create(...require('./../resources/calendars.json'));
+            .then((calendars) => {
+                if (calendars.length === 0) {
+                    Calendar.create(...require("./../resources/calendars.json"));
                 }
             })
             .catch(err => console.error(err));
@@ -25,9 +21,9 @@ export default class CalendarsService {
     /**
      * Find a calendar by his ID.
      * @param id
-     * @returns {undefined|ICalendar}
+     * @returns {undefined|Calendar}
      */
-    public find = (id: string) : Promise<ICalendar> =>
+    public find = (id: string): Promise<ICalendar> =>
         Calendar.findById(id).exec();
 
 
@@ -42,7 +38,7 @@ export default class CalendarsService {
 
     /**
      *
-     * @returns {ICalendar[]}
+     * @returns {Calendar[]}
      */
     public query = (): Promise<ICalendar[]> =>
         Calendar.find().exec();

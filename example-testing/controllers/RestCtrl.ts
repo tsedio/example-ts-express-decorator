@@ -1,17 +1,16 @@
-import {Controller, All, Get, RouteService} from "ts-express-decorators";
-import {$log} from "ts-log-debug";
+import {Controller, Get, RouteService} from "ts-express-decorators";
 
 @Controller("/rest")
 export class RestCtrl {
 
-    constructor(
-        private routeService: RouteService
-    ) {
+    constructor(private routeService: RouteService) {
 
     }
 
-    @Get('/')
-    public getRoutes(){
+    @Get("/")
+    public getRoutes() {
+
         return this.routeService.getAll();
+
     }
 }

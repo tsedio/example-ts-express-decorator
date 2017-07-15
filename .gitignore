@@ -45,3 +45,4 @@ jspm_packages
 .DS_Store
 example-passport/.DS_Store
 example-passport/controllers/.DS_Store
+/data/

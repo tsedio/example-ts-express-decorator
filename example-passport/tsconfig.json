@@ -1,8 +1,13 @@
 {
   "compilerOptions": {
+    "baseUrl": ".",
     "target": "es5",
     "lib": ["es6", "dom"],
-    "types": ["reflect-metadata"],
+    "types": [
+      "reflect-metadata",
+      "mocha",
+      "chai"
+    ],
     "module": "commonjs",
     "moduleResolution": "node",
     "experimentalDecorators":true,

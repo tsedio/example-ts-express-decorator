@@ -1,5 +1,5 @@
+import {GlobalAcceptMimesMiddleware, ServerLoader, ServerSettings} from "ts-express-decorators";
 import {$log} from "ts-log-debug";
-import {ServerLoader, ServerSettings, GlobalAcceptMimesMiddleware} from "ts-express-decorators";
 import Path = require("path");
 const rootDir = Path.resolve(__dirname);
 

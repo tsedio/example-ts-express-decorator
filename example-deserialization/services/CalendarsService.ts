@@ -1,21 +1,17 @@
-
-import {Service, ConverterService} from "ts-express-decorators";
-import Calendar from '../models/Calendar';
-import {CalendarModel} from '../models/Calendar';
+import {ConverterService, Service} from "ts-express-decorators";
+import {Calendar, CalendarModel} from "../models/Calendar";
 
 @Service()
-export default class CalendarsService {
+export class CalendarsService {
 
-    constructor(
-        private converterService: ConverterService
-    ) {
+    constructor(private converterService: ConverterService) {
 
         CalendarModel
             .find({})
             .exec()
-            .then((calendars: any[]) =>{
-                if(calendars.length === 0) {
-                    CalendarModel.create(...require('./../resources/calendars.json'));
+            .then((calendars: any[]) => {
+                if (calendars.length === 0) {
+                    CalendarModel.create(...require("./../resources/calendars.json"));
                 }
             })
             .catch(err => console.error(err));
@@ -33,9 +29,9 @@ export default class CalendarsService {
     /**
      * Find a calendar by his ID.
      * @param id
-     * @returns {undefined|ICalendar}
+     * @returns {undefined|Calendar}
      */
-    public find = (id: string) : Promise<Calendar> =>
+    public find = (id: string): Promise<Calendar> =>
         CalendarModel
             .findById(id)
             .exec()
@@ -55,7 +51,7 @@ export default class CalendarsService {
 
     /**
      *
-     * @returns {ICalendar[]}
+     * @returns {Calendar[]}
      */
     public query = (): Promise<Calendar[]> =>
         CalendarModel.find().exec()
@@ -66,7 +62,7 @@ export default class CalendarsService {
     /**
      *
      * @param calendar
-     * @returns {ICalendar}
+     * @returns {Calendar}
      */
     public update(calendar: Calendar): Promise<Calendar> {
 

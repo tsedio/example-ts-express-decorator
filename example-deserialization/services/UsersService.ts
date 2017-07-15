@@ -1,6 +1,5 @@
-
 import {Service} from "ts-express-decorators";
-import MemoryStorage from './MemoryStorage';
+import {MemoryStorage} from "./MemoryStorage";
 
 export interface IUser {
     _id: string;
@@ -15,12 +14,10 @@ export interface IUser {
 }
 
 @Service()
-export default class UsersService {
+export class UsersService {
 
-    constructor(
-        private memoryStorage: MemoryStorage
-    ) {
-        this.memoryStorage.set('users', require('./../resources/users.json'));
+    constructor(private memoryStorage: MemoryStorage) {
+        this.memoryStorage.set("users", require("./../resources/users.json"));
     }
 
     /**
@@ -42,18 +39,19 @@ export default class UsersService {
         const users: IUser[] = this.query();
         return users.find((value: IUser) => value.email === email && value.password === password);
     }
+
     /**
      * Create a new User
      * @param name
      * @returns {{id: any, name: string}}
      */
-    public create(user: IUser){
-        user._id = require('node-uuid').v4();
-        const users = this.memoryStorage.get<IUser[]>('users');
+    public create(user: IUser) {
+        user._id = require("node-uuid").v4();
+        const users = this.memoryStorage.get<IUser[]>("users");
 
         users.push(user);
 
-        this.memoryStorage.set('users', users);
+        this.memoryStorage.set("users", users);
 
         return user;
     }
@@ -79,7 +77,7 @@ export default class UsersService {
 
         users[index] = user;
 
-        this.memoryStorage.set('users', users);
+        this.memoryStorage.set("users", users);
 
         return user;
     }

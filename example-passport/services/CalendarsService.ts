@@ -1,29 +1,23 @@
-
 import {Service} from "ts-express-decorators";
-import MemoryStorage from './MemoryStorage';
-
-export interface ICalendar {
-    id: string;
-    name: string;
-}
+import {NotFound} from "ts-httpexceptions";
+import {Calendar} from "../interfaces/Calendar";
+import {MemoryStorage} from "./MemoryStorage";
 
 @Service()
-export default class CalendarsService {
+export class CalendarsService {
 
-    constructor(
-        private memoryStorage: MemoryStorage
-    ) {
-        this.memoryStorage.set('calendars', require('./../resources/calendars.json'));
+    constructor(private memoryStorage: MemoryStorage) {
+        this.memoryStorage.set("calendars", require("./../resources/calendars.json"));
     }
 
     /**
      * Find a calendar by his ID.
      * @param id
-     * @returns {undefined|ICalendar}
+     * @returns {undefined|Calendar}
      */
-    public find(id: string) {
-        const calendars: ICalendar[] = this.query();
-        return calendars.find((value: ICalendar) => value.id === id);
+    async find(id: string): Promise<Calendar> {
+        const calendars: Calendar[] = await this.query();
+        return calendars.find(calendar => calendar.id === id);
     }
 
     /**
@@ -31,39 +25,59 @@ export default class CalendarsService {
      * @param name
      * @returns {{id: any, name: string}}
      */
-    public create(name: string){
-        const calendar = {id: require('node-uuid').v4(), name: name};
-        const calendars = this.memoryStorage.get<ICalendar[]>('calendars');
+    async create(name: string) {
+        const calendar = {id: require("node-uuid").v4(), name: name};
+        const calendars = this.memoryStorage.get<Calendar[]>("calendars");
 
         calendars.push(calendar);
 
-        this.memoryStorage.set('calendars', calendars);
+        this.memoryStorage.set("calendars", calendars);
 
         return calendar;
     }
 
     /**
      *
-     * @returns {ICalendar[]}
+     * @returns {Calendar[]}
      */
-    public query(): ICalendar[] {
-        return this.memoryStorage.get<ICalendar[]>("calendars");
+    async query(): Promise<Calendar[]> {
+        return this.memoryStorage.get<Calendar[]>("calendars");
     }
 
     /**
      *
      * @param calendar
-     * @returns {ICalendar}
+     * @returns {Calendar}
      */
-    public update(calendar: ICalendar): ICalendar {
+    async update(calendar: Calendar): Promise<Calendar> {
 
-        const calendars = this.query();
+        const calendars = await this.query();
 
-        const index = calendars.findIndex((value: ICalendar) => value.id === calendar.id)
+        const index = calendars.findIndex((value: Calendar) => value.id === calendar.id);
 
         calendars[index] = calendar;
 
-        this.memoryStorage.set('calendars', calendars);
+        this.memoryStorage.set("calendars", calendars);
+
+        return calendar;
+    }
+
+    /**
+     *
+     * @param id
+     * @returns {Promise<Calendar>}
+     */
+    async remove(id: string): Promise<Calendar> {
+
+        const calendar = await this.find(id);
+
+        if (!calendar) {
+            throw new NotFound("Calendar not found");
+        }
+
+        const calendars = await this.query();
+
+        this.memoryStorage.set("calendars", calendars.filter(calendar => calendar.id === id));
 
         return calendar;
     }

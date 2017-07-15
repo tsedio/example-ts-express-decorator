@@ -1,6 +1,5 @@
-
-import {model, Schema} from 'mongoose';
-import {JsonProperty} from 'ts-express-decorators';
+import {model, Schema} from "mongoose";
+import {JsonProperty} from "ts-express-decorators";
 
 export const EventSchema = new Schema({
 
@@ -42,7 +41,7 @@ export const EventModel = model<any>('Event', EventSchema);
 /**
  *
  */
-export default class CalendarEvent {
+export class CalendarEvent {
 
     @JsonProperty('id')
     _id: string;

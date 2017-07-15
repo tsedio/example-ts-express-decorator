@@ -1,8 +1,7 @@
-
 import {Service} from "ts-express-decorators";
 
 @Service()
-export default class MemoryStorage {
+export class MemoryStorage {
 
     private states: Map<string, string> = new Map<string, string>();
 

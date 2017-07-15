@@ -1,6 +1,5 @@
-
-import {model, Schema} from 'mongoose';
-import {JsonProperty} from 'ts-express-decorators';
+import {model, Schema} from "mongoose";
+import {JsonProperty} from "ts-express-decorators";
 
 export const CalendarSchema = new Schema({
     name: {
@@ -24,7 +23,7 @@ export const CalendarModel = model<any>('Calendar', CalendarSchema);
 /**
  *
  */
-export default class Calendar {
+export class Calendar {
 
     @JsonProperty('id')
     _id: string;

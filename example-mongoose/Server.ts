@@ -1,16 +1,16 @@
 import * as Express from "express";
+import {GlobalAcceptMimesMiddleware, Inject, ServerLoader, ServerSettings} from "ts-express-decorators";
 import {$log} from "ts-log-debug";
-import {ServerLoader, ServerSettings, Inject, GlobalAcceptMimesMiddleware} from "ts-express-decorators";
+import {MongooseService} from "./services/MongooseService";
+import {PassportLocalService} from "./services/PassportLocalService";
 import Path = require("path");
-import MongooseService from './services/MongooseService';
-import PassportLocalService from "./services/PassportLocalService";
 
 const rootDir = Path.resolve(__dirname);
 
 @ServerSettings({
     rootDir,
     mount: {
-        '/rest': `${rootDir}/controllers/**/**.js`
+        "/rest": `${rootDir}/controllers/**/**.js`
     },
     acceptMimes: ["application/json"]
 })
@@ -19,7 +19,7 @@ export class Server extends ServerLoader {
     $onInit(): Promise<any> {
         return MongooseService
             .connect()
-            .then(() => $log.debug('DB connected'));
+            .then(() => $log.debug("DB connected"));
     }
 
     /**
@@ -27,19 +27,19 @@ export class Server extends ServerLoader {
      * @returns {Server}
      */
     @Inject()
-    $onMountingMiddlewares(passportService: PassportLocalService): void|Promise<any> {
+    $onMountingMiddlewares(passportService: PassportLocalService): void | Promise<any> {
 
-        const morgan = require('morgan'),
-            cookieParser = require('cookie-parser'),
-            bodyParser = require('body-parser'),
-            compress = require('compression'),
-            methodOverride = require('method-override'),
-            session = require('express-session'),
-            passport = require('passport');
+        const morgan = require("morgan"),
+            cookieParser = require("cookie-parser"),
+            bodyParser = require("body-parser"),
+            compress = require("compression"),
+            methodOverride = require("method-override"),
+            session = require("express-session"),
+            passport = require("passport");
 
 
         this
-            .use(morgan('dev'))
+            .use(morgan("dev"))
             .use(GlobalAcceptMimesMiddleware)
             .use(cookieParser())
             .use(compress({}))
@@ -51,12 +51,12 @@ export class Server extends ServerLoader {
 
             // Configure session used by Passport
             .use(session({
-                secret: 'mysecretkey',
+                secret: "mysecretkey",
                 resave: true,
                 saveUninitialized: true,
                 maxAge: 36000,
                 cookie: {
-                    path: '/',
+                    path: "/",
                     httpOnly: true,
                     secure: false,
                     maxAge: null
@@ -81,10 +81,10 @@ export class Server extends ServerLoader {
     }
 
     $onReady() {
-        $log.debug('Server initialized')
+        $log.debug("Server initialized");
     }
 
     $onServerInitError(error): any {
-        $log.error('Server encounter an error =>', error);
+        $log.error("Server encounter an error =>", error);
     }
 }

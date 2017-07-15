@@ -1,25 +1,11 @@
-
-import {Service, ConverterService} from "ts-express-decorators";
-import {EventModel} from '../models/Event';
-import {BadRequest} from 'ts-httpexceptions';
-import CalendarEvent from '../models/Event';
+import {ConverterService, Service} from "ts-express-decorators";
+import {BadRequest} from "ts-httpexceptions";
+import {CalendarEvent, EventModel} from "../models/Event";
 
 @Service()
-export default class EventsService {
+export class EventsService {
 
-    constructor(
-        private converterService: ConverterService
-    ) {
-
-        /*EventModel
-            .find({})
-            .exec()
-            .then((Events: any[]) =>{
-                if(Events.length === 0) {
-                    EventModel.create(...require('./../resources/Events.json'));
-                }
-            })
-            .catch(err => console.error(err));*/
+    constructor(private converterService: ConverterService) {
 
     }
 
@@ -34,9 +20,9 @@ export default class EventsService {
     /**
      * Find a CalendarEvent by his ID.
      * @param id
-     * @returns {undefined|IEvent}
+     * @returns {undefined|EventModel}
      */
-    public find = (id: string) : Promise<CalendarEvent> =>
+    public find = (id: string): Promise<CalendarEvent> =>
         EventModel
             .findById(id)
             .exec()
@@ -57,7 +43,6 @@ export default class EventsService {
             .then(event => this.deserialize(event));
 
     }
-
 
 
     /**
@@ -101,7 +86,7 @@ export default class EventsService {
     private static checkPrecondition(event: CalendarEvent) {
 
         if (event.dateStart.getTime() > event.dateEnd.getTime()) {
-            new BadRequest("dateStart to be under dateEnd.")
+            new BadRequest("dateStart to be under dateEnd.");
         }
 
     }

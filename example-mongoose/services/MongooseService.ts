@@ -1,24 +1,24 @@
 import * as Mongoose from "mongoose";
-import {Service} from 'ts-express-decorators';
-import {Value} from 'ts-json-properties';
+import {Service} from "ts-express-decorators";
+import {Value} from "ts-json-properties";
 
+(<any>Mongoose).Promise = global.Promise;
 
 class MongooseUrl {
 
-    @Value('mongoose.development')
-    dbInfo: {host: string, name: string};
+    @Value("mongoose.development")
+    dbInfo: { host: string, name: string };
 
     getHost = () => this.dbInfo.host;
     getName = () => this.dbInfo.name;
 
-    toString(){
-        console.log(this.dbInfo);
-        return 'mongodb://' + this.getHost() + '/' + this.getName();
+    toString() {
+        return "mongodb://" + this.getHost() + "/" + this.getName();
     }
 }
 
 @Service()
-export default class MongooseService {
+export class MongooseService {
 
     static resource: Mongoose.Connection;
 
@@ -28,27 +28,18 @@ export default class MongooseService {
      *
      * @returns {Promise<Mongoose.Connection>}
      */
-    static connect(): Promise<Mongoose.Connection> {
+    static async connect(): Promise<Mongoose.Connection> {
 
-        return new Promise<Mongoose.Connection>((resolve, reject) => {
+        if (MongooseService.resource) {
+            return Promise.resolve(MongooseService.resource);
+        }
 
-            if(MongooseService.resource) {
-                resolve(MongooseService.resource);
-            }
+        const db = await Mongoose.createConnection(new MongooseUrl().toString(), {
+            useMongoClient: true
+        } as any);
 
-            (<any>Mongoose).Promise = global.Promise;
+        MongooseService.resource = db;
 
-            Mongoose.connect(new MongooseUrl().toString());
-
-            const db = Mongoose.connection;
-
-            db.on('error', reject);
-
-            db.once('open', () =>{
-                MongooseService.resource = db;
-                resolve(db);
-            });
-
-        });
+        return db;
     }
 }

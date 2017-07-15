@@ -1,8 +1,8 @@
+import {$log} from "ts-log-debug";
 /**
  * Test
  */
 import {Server} from "./Server";
-import {$log} from "ts-log-debug";
 
 $log.info('Initialize server');
 

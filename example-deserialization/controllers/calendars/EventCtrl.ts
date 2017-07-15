@@ -1,13 +1,10 @@
-import {
-    Controller, Get, Post, Put, Delete, Response, Authenticated, PathParams,
-    BodyParams
-} from "ts-express-decorators";
+import {Authenticated, BodyParams, Controller, Delete, Get, PathParams, Post, Put} from "ts-express-decorators";
+import {CalendarEvent} from "../../models/Event";
 
-import EventsService from '../../services/EventsService';
-import CalendarEvent from '../../models/Event';
+import {EventsService} from "../../services/EventsService";
 
 @Controller("/events")
-export default class EventCtrl {
+export class EventCtrl {
 
     constructor(private eventsService: EventsService) {
 
@@ -18,9 +15,9 @@ export default class EventCtrl {
      * @returns {null}
      * @param id
      */
-    @Get('/:id')
+    @Get("/:id")
     @Authenticated()
-    find(@PathParams('id') id: string): Promise<CalendarEvent> {
+    find(@PathParams("id") id: string): Promise<CalendarEvent> {
 
         return this.eventsService.find(id);
     }
@@ -29,7 +26,7 @@ export default class EventCtrl {
      * Create a new event for a calendar.
      * @returns {null}
      */
-    @Put('/')
+    @Put("/")
     @Authenticated()
     create(@BodyParams() event: CalendarEvent): Promise<CalendarEvent> {
         return this.eventsService.create(event);
@@ -39,22 +36,22 @@ export default class EventCtrl {
      *
      * @returns {null}
      */
-    @Post('/:id')
+    @Post("/:id")
     @Authenticated()
     update(@BodyParams() event: CalendarEvent): Promise<CalendarEvent> {
         return this.eventsService.update(event);
     }
 
 
-    @Delete('/:id')
+    @Delete("/:id")
     @Authenticated()
     remove(): Promise<any> {
         return null;
     }
 
-    @Get('/')
+    @Get("/")
     @Authenticated()
-    query(@BodyParams('calendarId') calendarId): Promise<CalendarEvent[]> {
+    query(@BodyParams("calendarId") calendarId): Promise<CalendarEvent[]> {
         return this.eventsService.query(calendarId);
     }
 }

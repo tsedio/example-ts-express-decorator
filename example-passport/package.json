@@ -8,7 +8,7 @@
     "coverage": "npm run test-cov && npm run test-remap",
     "postinstall": "npm run build",
     "tslint": "tslint ./*.ts ./lib/*.ts",
-    "test": "mocha --reporter spec --check-leaks --bail test/",
+    "test": "mocha --reporter spec --check-leaks --bail test/ --recursive",
     "tsc": "tsc",
     "tsc:w": "tsc -w",
     "tsc:es5": "tsc --project tsconfig.json",
@@ -20,6 +20,14 @@
     "ts-json-properties": "^1.1.1"
   },
   "devDependencies": {
+    "@types/mongoose": "^4.6.1",
+    "@types/node": "^6.0.38",
+    "@types/passport": "^0.2.34",
+    "@types/passport-local": "^1.0.29",
+    "@types/chai": "^3.4.34",
+    "@types/mocha": "^2.2.33",
+    "chai": "^3.5.0",
+    "mocha": "^3.1.2",
     "concurrently": "^3.1.0",
     "nodemon": "^1.11.0"
   }

@@ -1,13 +1,12 @@
-
-import {Service} from "ts-express-decorators";
-import UsersService from './UsersService';
-import * as Passport from 'passport';
+import * as Passport from "passport";
 import {Strategy} from "passport-local";
+import {Service} from "ts-express-decorators";
+import {UsersService} from "./UsersService";
 
 @Service()
-export default class PassportLocalService {
+export class PassportLocalService {
 
-    constructor(private usersService: UsersService){
+    constructor(private usersService: UsersService) {
 
         // used to serialize the user for the session
         Passport.serializeUser(PassportLocalService.serialize);
@@ -29,7 +28,7 @@ export default class PassportLocalService {
      * @param user
      * @param done
      */
-    static serialize(user, done){
+    static serialize(user, done) {
         done(null, user._id);
     }
 
@@ -47,23 +46,23 @@ export default class PassportLocalService {
     // =========================================================================
     // we are using named strategies since we have one for login and one for signup
     // by default, if there was no name, it would just be called 'local'
-    public initLocalSignup(){
+    public initLocalSignup() {
 
         Passport
-            .use('signup', new Strategy({
+            .use("signup", new Strategy({
                     // by default, local strategy uses username and password, we will override with email
-                    usernameField :     'email',
-                    passwordField :     'password',
-                    passReqToCallback:  true // allows us to pass back the entire request to the callback
+                    usernameField: "email",
+                    passwordField: "password",
+                    passReqToCallback: true // allows us to pass back the entire request to the callback
                 },
                 (req, email, password, done) => {
-                    console.log('LOCAL SIGNUP', email, password);
+                    console.log("LOCAL SIGNUP", email, password);
                     // asynchronous
                     // User.findOne wont fire unless data is sent back
                     process.nextTick(() => {
                         this.onLocalSignup(req, email, password, done);
                     });
-                }))
+                }));
 
     }
 
@@ -95,12 +94,12 @@ export default class PassportLocalService {
     // we are using named strategies since we have one for login and one for signup
     // by default, if there was no name, it would just be called 'local'
 
-    public initLocalLogin(){
+    public initLocalLogin() {
 
-        Passport.use('login', new Strategy({
+        Passport.use("login", new Strategy({
             // by default, local strategy uses username and password, we will override with email
-            usernameField:     'email',
-            passwordField:     'password',
+            usernameField: "email",
+            passwordField: "password",
             passReqToCallback: true // allows us to pass back the entire request to the callback
         }, this.onLocalLogin));
 

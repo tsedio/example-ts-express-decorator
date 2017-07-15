@@ -1,26 +1,12 @@
-
 import {Service} from "ts-express-decorators";
-import MemoryStorage from './MemoryStorage';
-
-export interface IUser {
-    _id: string;
-    name: {
-        first: string;
-        last: string;
-    },
-    password: string,
-    email: string;
-    phone: string;
-    address: string;
-}
+import {IUser} from "../interfaces/User";
+import {MemoryStorage} from "./MemoryStorage";
 
 @Service()
-export default class UsersService {
+export class UsersService {
 
-    constructor(
-        private memoryStorage: MemoryStorage
-    ) {
-        this.memoryStorage.set('users', require('./../resources/users.json'));
+    constructor(private memoryStorage: MemoryStorage) {
+        this.memoryStorage.set("users", require("./../resources/users.json"));
     }
 
     /**
@@ -28,32 +14,33 @@ export default class UsersService {
      * @param id
      * @returns {undefined|IUser}
      */
-    public find(id: string) {
-        const users: IUser[] = this.query();
+    async find(id: string) {
+        const users: IUser[] = await this.query();
         return users.find((value: IUser) => value._id === id);
     }
 
-    public findByEmail(email: string) {
-        const users: IUser[] = this.query();
+    async findByEmail(email: string) {
+        const users: IUser[] = await this.query();
         return users.find((value: IUser) => value.email === email);
     }
 
-    public findByCredential(email: string, password: string) {
-        const users: IUser[] = this.query();
+    async findByCredential(email: string, password: string) {
+        const users: IUser[] = await this.query();
         return users.find((value: IUser) => value.email === email && value.password === password);
     }
+
     /**
      * Create a new User
      * @param name
      * @returns {{id: any, name: string}}
      */
-    public create(user: IUser){
-        user._id = require('node-uuid').v4();
-        const users = this.memoryStorage.get<IUser[]>('users');
+    async create(user: IUser) {
+        user._id = require("node-uuid").v4();
+        const users = this.memoryStorage.get<IUser[]>("users");
 
         users.push(user);
 
-        this.memoryStorage.set('users', users);
+        this.memoryStorage.set("users", users);
 
         return user;
     }
@@ -62,7 +49,7 @@ export default class UsersService {
      *
      * @returns {IUser[]}
      */
-    public query(): IUser[] {
+    async query(): Promise<IUser[]> {
         return this.memoryStorage.get<IUser[]>("users");
     }
 
@@ -71,15 +58,15 @@ export default class UsersService {
      * @param user
      * @returns {IUser}
      */
-    public update(user: IUser): IUser {
+    async update(user: IUser): Promise<IUser> {
 
-        const users = this.query();
+        const users = await this.query();
 
         const index = users.findIndex((value: IUser) => value._id === user._id);
 
         users[index] = user;
 
-        this.memoryStorage.set('users', users);
+        this.memoryStorage.set("users", users);
 
         return user;
     }

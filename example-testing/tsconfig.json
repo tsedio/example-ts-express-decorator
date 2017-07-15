@@ -13,13 +13,7 @@
     "experimentalDecorators":true,
     "emitDecoratorMetadata": true,
     "sourceMap": true,
-    "declaration": false,
-    "paths":{
-      "ts-express-decorators/testing": [
-        "node_modules/ts-express-decorators/dts/testing/index.d.ts",
-        "node_modules/ts-express-decorators/lib/testing/index.js"
-      ]
-    }
+    "declaration": false
   },
   "exclude": [
     "node_modules"

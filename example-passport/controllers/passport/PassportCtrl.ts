@@ -5,8 +5,6 @@ import * as Passport from "passport";
 import {BodyParams, Controller, Get, Post, Req, Required, Res} from "ts-express-decorators";
 import {BadRequest} from "ts-httpexceptions";
 import {IUser} from "../../interfaces/User";
-import Events = require("events");
-import EventEmitter = NodeJS.EventEmitter;
 
 @Controller("/passport")
 export class PassportCtrl {

@@ -63,8 +63,7 @@ export class Server extends ServerLoader {
                 }
             }))
             // Configure passport JS
-            .use(passportService.middlewareInitialize())
-            .use(passportService.middlewareSession());
+
 
         return null;
     }

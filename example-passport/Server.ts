@@ -1,6 +1,6 @@
-import {GlobalAcceptMimesMiddleware, Inject, ServerLoader, ServerSettings} from "ts-express-decorators";
+import * as Path from "path";
+import {GlobalAcceptMimesMiddleware, ServerLoader, ServerSettings} from "ts-express-decorators";
 import {$log} from "ts-log-debug";
-import Path = require("path");
 
 const rootDir = Path.resolve(__dirname);
 
@@ -24,7 +24,6 @@ export class Server extends ServerLoader {
      * This method let you configure the middleware required by your application to works.
      * @returns {Server}
      */
-    @Inject()
     $onMountingMiddlewares(): void | Promise<any> {
 
         const cookieParser = require("cookie-parser"),
@@ -34,7 +33,6 @@ export class Server extends ServerLoader {
             session = require("express-session");
 
         this
-
             .use(GlobalAcceptMimesMiddleware)
             .use(cookieParser())
             .use(compress({}))

@@ -1,17 +1,6 @@
 import {Service} from "ts-express-decorators";
+import {IUser} from "../interfaces/User";
 import {MemoryStorage} from "./MemoryStorage";
-
-export interface IUser {
-    _id: string;
-    name: {
-        first: string;
-        last: string;
-    },
-    password: string,
-    email: string;
-    phone: string;
-    address: string;
-}
 
 @Service()
 export class UsersService {
@@ -25,18 +14,18 @@ export class UsersService {
      * @param id
      * @returns {undefined|IUser}
      */
-    public find(id: string) {
-        const users: IUser[] = this.query();
+    async find(id: string) {
+        const users: IUser[] = await this.query();
         return users.find((value: IUser) => value._id === id);
     }
 
-    public findByEmail(email: string) {
-        const users: IUser[] = this.query();
+    async findByEmail(email: string) {
+        const users: IUser[] = await this.query();
         return users.find((value: IUser) => value.email === email);
     }
 
-    public findByCredential(email: string, password: string) {
-        const users: IUser[] = this.query();
+    async findByCredential(email: string, password: string) {
+        const users: IUser[] = await this.query();
         return users.find((value: IUser) => value.email === email && value.password === password);
     }
 
@@ -45,7 +34,7 @@ export class UsersService {
      * @param name
      * @returns {{id: any, name: string}}
      */
-    public create(user: IUser) {
+    async create(user: IUser) {
         user._id = require("node-uuid").v4();
         const users = this.memoryStorage.get<IUser[]>("users");
 
@@ -60,7 +49,7 @@ export class UsersService {
      *
      * @returns {IUser[]}
      */
-    public query(): IUser[] {
+    async query(): Promise<IUser[]> {
         return this.memoryStorage.get<IUser[]>("users");
     }
 
@@ -69,9 +58,9 @@ export class UsersService {
      * @param user
      * @returns {IUser}
      */
-    public update(user: IUser): IUser {
+    async update(user: IUser): Promise<IUser> {
 
-        const users = this.query();
+        const users = await this.query();
 
         const index = users.findIndex((value: IUser) => value._id === user._id);
 

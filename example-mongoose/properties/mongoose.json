@@ -1,14 +1,14 @@
 {
   "test": {
-    "host": "localhost",
+    "host": "127.0.0.1:27017",
     "name": "example-mongoose-test"
   },
   "development": {
-    "host": "localhost",
+    "host": "127.0.0.1:27017",
     "name": "example-mongoose-dev"
   },
   "production": {
-    "host": "localhost",
+    "host": "127.0.0.1:27017",
     "name": "example-mongoose-prod"
   }
 }

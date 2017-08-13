@@ -1,6 +1,7 @@
 import * as Mongoose from "mongoose";
 import {Service} from "ts-express-decorators";
 import {Value} from "ts-json-properties";
+import {$log} from "ts-log-debug";
 
 (<any>Mongoose).Promise = global.Promise;
 
@@ -34,9 +35,8 @@ export class MongooseService {
             return Promise.resolve(MongooseService.resource);
         }
 
-        const db = await Mongoose.createConnection(new MongooseUrl().toString(), {
-            useMongoClient: true
-        } as any);
+        $log.debug("new MongooseUrl().toString()", new MongooseUrl().toString());
+        const db = await Mongoose.connect(new MongooseUrl().toString());
 
         MongooseService.resource = db;
 

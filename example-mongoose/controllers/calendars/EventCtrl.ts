@@ -1,65 +1,91 @@
-import {Authenticated, Controller, Delete, Get, Post, Put, Response} from "ts-express-decorators";
+import {
+    Authenticated,
+    BodyParams,
+    Controller,
+    Delete,
+    Get,
+    MergeParams,
+    PathParams,
+    Post,
+    Put,
+    Required,
+    Status,
+    UseBefore
+} from "ts-express-decorators";
+import {NotFound} from "ts-httpexceptions";
+import {CheckCalendarIdMiddleware} from "../../middlewares/CheckCalendarId";
+import {CalendarEvent} from "../../models/CalendarEvent";
+import {CalendarEventsService} from "../../services/CalendarEventsService";
 
-interface IEvent{
-    id: string;
-}
 
-@Controller("/events")
+@Controller("/:calendarId/events")
+@MergeParams(true)
 export class EventCtrl {
+    constructor(private calendarEventsService: CalendarEventsService) {
 
-    /**
-     *
-     * @param response
-     * @returns {null}
-     */
-    @Get('/:id')
-    @Authenticated()
-    find(
-        @Response() response: any): Promise<IEvent> | void {
-
-        response.send(200, 'OK');
-
-        return null;
     }
 
     /**
      *
      * @returns {null}
      */
-    @Put('/')
-    @Authenticated()
-    save(): Promise<any> | void {
-
-
-
-        return null;
+    @Get("/:id")
+    @UseBefore(CheckCalendarIdMiddleware)
+    async get(@PathParams("id") id: string): Promise<CalendarEvent> {
+        return this.calendarEventsService
+            .find(id)
+            .catch((err) => {
+                throw new NotFound("Event not found");
+            });
     }
 
     /**
      *
      * @returns {null}
      */
-    @Post('/:id')
-    @Authenticated()
-    update(): Promise<any> | void {
+    @Put("/")
+    @UseBefore(CheckCalendarIdMiddleware)
+    async save(@Required() @PathParams("calendarId") calendarId: string,
+               @BodyParams() calendarEvent: CalendarEvent): Promise<CalendarEvent> {
 
+        calendarEvent.calendarId = calendarId;
 
-        return null;
+        return this.calendarEventsService.save(calendarEvent);
+    }
+
+    /**
+     *
+     * @returns {null}
+     */
+    @Post("/:id")
+    @UseBefore(CheckCalendarIdMiddleware)
+    async update(@PathParams("id") id: string,
+                 @BodyParams() calendarEvent: CalendarEvent): Promise<CalendarEvent> {
+
+        return this
+            .calendarEventsService
+            .find(id)
+            .then(() => this.calendarEventsService.save(calendarEvent))
+            .catch((err) => {
+                throw new NotFound("Calendar id not found");
+            });
     }
 
     /**
      *
      */
-    @Delete('/:id')
+    @Delete("/:id")
     @Authenticated()
-    remove(): Promise<any> | void {
-        return null;
+    @UseBefore(CheckCalendarIdMiddleware)
+    @Status(204)
+    async remove(@Required() @PathParams("calendarId") calendarId: string,
+                 @PathParams("id") id: string): Promise<void> {
+        return this.calendarEventsService.remove(id);
     }
 
-    @Get('/')
-    @Authenticated()
-    query(): Promise<any[]> | void {
-
-        return null;
+    @Get("/")
+    @UseBefore(CheckCalendarIdMiddleware)
+    async getEvents(@Required() @PathParams("calendarId") calendarId: string): Promise<CalendarEvent[]> {
+        return this.calendarEventsService.query(calendarId);
     }
 }

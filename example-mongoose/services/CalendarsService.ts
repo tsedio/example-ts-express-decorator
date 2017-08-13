@@ -1,5 +1,6 @@
 import {Service} from "ts-express-decorators";
-import {Calendar, ICalendar} from "../models/Calendar";
+import {$log} from "ts-log-debug";
+import {Calendar} from "../models/Calendar";
 
 @Service()
 export class CalendarsService {
@@ -23,42 +24,45 @@ export class CalendarsService {
      * @param id
      * @returns {undefined|Calendar}
      */
-    public find = (id: string): Promise<ICalendar> =>
-        Calendar.findById(id).exec();
+    async find(id: string): Promise<Calendar> {
+        $log.debug("Search a calendar from ID", id);
+        const calendar = await Calendar.findById(id).exec();
 
+        $log.debug("Found", calendar);
+        return calendar;
+    }
 
     /**
-     * Create a new Calendar
-     * @param name
-     * @returns {{id: any, name: string}}
+     *
+     * @param calendar
+     * @returns {Promise<TResult|TResult2|Calendar>}
      */
-    public create = (name: string): Promise<ICalendar> =>
-        Calendar.create({name: name});
+    async save(calendar: Calendar): Promise<Calendar> {
+        $log.debug({message: "Validate calendar", calendar});
 
+        await calendar.validate();
+        $log.debug({message: "Save calendar", calendar});
+        await calendar.update(calendar, {upsert: true});
+
+        $log.debug({message: "Calendar saved", calendar});
+
+        return calendar;
+    }
 
     /**
      *
      * @returns {Calendar[]}
      */
-    public query = (): Promise<ICalendar[]> =>
-        Calendar.find().exec();
+    async query(options = {}): Promise<Calendar[]> {
+        return Calendar.find(options).exec();
+    }
 
     /**
      *
-     * @param calendar
-     * @returns {ICalendar}
+     * @param id
+     * @returns {Promise<Calendar>}
      */
-    public update(calendar: ICalendar): Promise<ICalendar> {
-
-        return Calendar
-            .findById(calendar._id)
-            .exec()
-            .then<ICalendar>((calendarResult) => {
-
-                delete calendar._id;
-                Object.assign(calendarResult, calendar);
-
-                return calendarResult.save();
-            });
+    async remove(id: string): Promise<void> {
+        await Calendar.findById(id).remove().exec();
     }
 }

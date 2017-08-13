@@ -1,7 +1,19 @@
-import {Authenticated, BodyParams, Controller, Get, PathParams, Post, Put} from "ts-express-decorators";
-import {ICalendar} from "../../models/Calendar";
+import {
+    Authenticated,
+    BodyParams,
+    Controller,
+    Delete,
+    Get,
+    PathParams,
+    Post,
+    Put,
+    Req,
+    Required,
+    Status
+} from "ts-express-decorators";
+import {NotFound} from "ts-httpexceptions";
+import {Calendar} from "../../models/Calendar";
 import {CalendarsService} from "../../services/CalendarsService";
-
 import {EventCtrl} from "./EventCtrl";
 
 /**
@@ -20,28 +32,57 @@ export class CalendarCtrl {
     }
 
     @Get("/:id")
-    @Authenticated()
-    find(@PathParams("id") id: string): Promise<ICalendar> {
-        return this.calendarsService.find(id);
+    async get(@Required() @PathParams("id") id: string): Promise<Calendar> {
+
+        const calendar = await this.calendarsService.find(id);
+
+        if (calendar) {
+            return calendar;
+        }
+
+        throw new NotFound("Calendar not found");
     }
 
-    @Post("/")
-    @Authenticated()
-    save(@BodyParams("name") name: string) {
-        return this.calendarsService.create(name);
+    @Put("/")
+    save(@BodyParams() calendar: Calendar, @Req() request) {
+        return this.calendarsService.save(calendar);
     }
 
-    @Put("/:id")
+    /**
+     *
+     * @param id
+     * @param calendar
+     * @returns {Promise<Calendar>}
+     */
+    @Post("/:id")
+    async update(@PathParams("id") @Required() id: string,
+                 @BodyParams() @Required() calendar: Calendar): Promise<Calendar> {
+
+        return this
+            .calendarsService
+            .find(id)
+            .then(() => this.calendarsService.save(calendar))
+            .catch((err) => {
+                throw new NotFound("Calendar id not found");
+            });
+
+    }
+
+    /**
+     *
+     * @param id
+     * @returns {{id: string, name: string}}
+     */
+    @Delete("/")
     @Authenticated()
-    update(@PathParams("id") id: string,
-           @BodyParams("name") name: string) {
-        return this.calendarsService.update(<ICalendar>{_id: id, name: name});
+    @Status(204)
+    async remove(@BodyParams("id") @Required() id: string): Promise<void> {
+        this.calendarsService.remove(id);
     }
 
     @Get("/")
-    //@Authenticated()
-    query() {
+    @Authenticated()
+    async getAllCalendars(): Promise<Calendar[]> {
         return this.calendarsService.query();
     }
-
 }

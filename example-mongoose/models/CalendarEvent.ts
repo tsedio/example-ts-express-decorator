@@ -1,11 +1,10 @@
 import {model, Schema} from "mongoose";
 import {JsonProperty} from "ts-express-decorators";
 
-export const EventSchema = new Schema({
-
+export const schema = new Schema({
     calendarId: {
         type: Schema.Types.ObjectId,
-        ref: 'Calendar'
+        ref: "Calendar"
     },
 
     name: {
@@ -36,20 +35,14 @@ export const EventSchema = new Schema({
     description: String
 });
 
-export const EventModel = model<any>('Event', EventSchema);
-
-/**
- *
- */
 export class CalendarEvent {
-
-    @JsonProperty('id')
+    @JsonProperty("id")
     _id: string;
 
     @JsonProperty()
     calendarId: string;
 
-    @JsonProperty('name')
+    @JsonProperty("name")
     name: string;
 
     @JsonProperty()
@@ -68,5 +61,4 @@ export class CalendarEvent {
     description: string;
 }
 
-
-
+export const CalendarEventModel = model<any>("Event", schema);

@@ -1,9 +1,7 @@
-import * as Express from "express";
-import {GlobalAcceptMimesMiddleware, Inject, ServerLoader, ServerSettings} from "ts-express-decorators";
+import * as Path from "path";
+import {GlobalAcceptMimesMiddleware, ServerLoader, ServerSettings} from "ts-express-decorators";
 import {$log} from "ts-log-debug";
 import {MongooseService} from "./services/MongooseService";
-import {PassportLocalService} from "./services/PassportLocalService";
-import Path = require("path");
 
 const rootDir = Path.resolve(__dirname);
 
@@ -12,7 +10,11 @@ const rootDir = Path.resolve(__dirname);
     mount: {
         "/rest": `${rootDir}/controllers/**/**.js`
     },
-    acceptMimes: ["application/json"]
+    acceptMimes: ["application/json"],
+    passport: {},
+    httpPort: 8001,
+    httpsPort: false,
+    debug: true
 })
 export class Server extends ServerLoader {
 
@@ -26,20 +28,15 @@ export class Server extends ServerLoader {
      * This method let you configure the middleware required by your application to works.
      * @returns {Server}
      */
-    @Inject()
-    $onMountingMiddlewares(passportService: PassportLocalService): void | Promise<any> {
+    $onMountingMiddlewares(): void | Promise<any> {
 
-        const morgan = require("morgan"),
-            cookieParser = require("cookie-parser"),
+        const cookieParser = require("cookie-parser"),
             bodyParser = require("body-parser"),
             compress = require("compression"),
             methodOverride = require("method-override"),
-            session = require("express-session"),
-            passport = require("passport");
-
+            session = require("express-session");
 
         this
-            .use(morgan("dev"))
             .use(GlobalAcceptMimesMiddleware)
             .use(cookieParser())
             .use(compress({}))
@@ -61,22 +58,9 @@ export class Server extends ServerLoader {
                     secure: false,
                     maxAge: null
                 }
-            }))
-            // Configure passport JS
-
+            }));
 
         return null;
-    }
-
-    /**
-     * Set here your check authentification strategy.
-     * @param request
-     * @param response
-     * @param next
-     * @returns {boolean}
-     */
-    $onAuth(request: Express.Request, response: Express.Response): boolean {
-        return request.isAuthenticated();
     }
 
     $onReady() {

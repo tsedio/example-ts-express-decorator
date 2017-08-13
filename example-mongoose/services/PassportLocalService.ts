@@ -1,12 +1,23 @@
 import * as Passport from "passport";
 import {Strategy} from "passport-local";
-import {Service} from "ts-express-decorators";
+import {
+    AfterRoutesInit,
+    BeforeRoutesInit,
+    ExpressApplication,
+    Inject,
+    ServerSettingsService,
+    Service
+} from "ts-express-decorators";
+import {BadRequest, NotFound} from "ts-httpexceptions";
+import {IUser} from "../interfaces/User";
 import {UsersService} from "./UsersService";
 
 @Service()
-export class PassportLocalService {
+export class PassportLocalService implements BeforeRoutesInit, AfterRoutesInit {
 
-    constructor(private usersService: UsersService) {
+    constructor(private usersService: UsersService,
+                private serverSettings: ServerSettingsService,
+                @Inject(ExpressApplication) private  expressApplication: ExpressApplication) {
 
         // used to serialize the user for the session
         Passport.serializeUser(PassportLocalService.serialize);
@@ -15,12 +26,17 @@ export class PassportLocalService {
         Passport.deserializeUser(this.deserialize.bind(this));
     }
 
-    middlewareInitialize() {
-        return Passport.initialize();
+    $beforeRoutesInit() {
+        const options: any = this.serverSettings.get("passport") || {} as any;
+        const {userProperty, pauseStream} = options;
+
+        this.expressApplication.use(Passport.initialize({userProperty}));
+        this.expressApplication.use(Passport.session({pauseStream}));
     }
 
-    middlewareSession(options?) {
-        return Passport.session(options);
+    $afterRoutesInit() {
+        this.initializeSignup();
+        this.initializeLogin();
     }
 
     /**
@@ -46,7 +62,7 @@ export class PassportLocalService {
     // =========================================================================
     // we are using named strategies since we have one for login and one for signup
     // by default, if there was no name, it would just be called 'local'
-    public initLocalSignup() {
+    public initializeSignup() {
 
         Passport
             .use("signup", new Strategy({
@@ -56,36 +72,43 @@ export class PassportLocalService {
                     passReqToCallback: true // allows us to pass back the entire request to the callback
                 },
                 (req, email, password, done) => {
-                    console.log("LOCAL SIGNUP", email, password);
+                    const {firstName, lastName} = req.body;
                     // asynchronous
                     // User.findOne wont fire unless data is sent back
                     process.nextTick(() => {
-                        this.onLocalSignup(req, email, password, done);
+                        this.signup({
+                            firstName,
+                            lastName,
+                            email,
+                            password
+                        })
+                            .then((user) => done(null, user))
+                            .catch((err) => done(err));
                     });
                 }));
 
     }
 
-    private onLocalSignup(req, email, password, done): void {
+    /**
+     *
+     * @param user
+     * @returns {Promise<any>}
+     */
+    async signup(user: IUser) {
 
-        const user = this.usersService.findByEmail(email);
+        const exists = await this.usersService.findByEmail(user.email);
 
-        if (user) { //User exists
-            return done(null, false);
+        if (exists) { //User exists
+            throw new BadRequest("Email is already registered");
         }
 
         // Create new User
-        const newUser = this.usersService.create(<any>{
-            email: email,
-            password: password,
-            name: {
-                firstName: req.body.firstName,
-                lastName: req.body.lastName
-            }
+        return await this.usersService.create(<any>{
+            email: user.email,
+            password: user.password,
+            firstName: user.firstName,
+            lastName: user.lastName
         });
-
-        done(null, newUser);
-
     }
 
     // =========================================================================
@@ -94,29 +117,31 @@ export class PassportLocalService {
     // we are using named strategies since we have one for login and one for signup
     // by default, if there was no name, it would just be called 'local'
 
-    public initLocalLogin() {
-
+    public initializeLogin() {
         Passport.use("login", new Strategy({
             // by default, local strategy uses username and password, we will override with email
             usernameField: "email",
             passwordField: "password",
             passReqToCallback: true // allows us to pass back the entire request to the callback
-        }, this.onLocalLogin));
-
+        }, (req, email, password, done) => {
+            this.login(email, password)
+                .then((user) => done(null, user))
+                .catch((err) => done(err));
+        }));
     }
 
-    private onLocalLogin = (req, email, password, done) => {
-        //$log.debug('LocalLogin', login, password);
-
-        const user = this.usersService.findByCredential(email, password);
-
-        if (!user) {
-            return done(null, false); // req.flash is the way to set flashdata using connect-flash
+    /**
+     *
+     * @param email
+     * @param password
+     * @returns {Promise<boolean>}
+     */
+    async login(email: string, password: string): Promise<IUser> {
+        const user = await this.usersService.findByCredential(email, password);
+        if (user) {
+            return user;
         }
 
-
-        // all is well, return successful user
-        return done(null, user);
-
+        throw new NotFound("User not found");
     };
 }

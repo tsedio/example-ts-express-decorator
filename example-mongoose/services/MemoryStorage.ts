@@ -16,7 +16,6 @@ export class MemoryStorage {
     public get<T>(key: string): T {
         return JSON.parse(this.states.get(key));
     }
-
     /**
      * Serialize value and store it.
      * @param key

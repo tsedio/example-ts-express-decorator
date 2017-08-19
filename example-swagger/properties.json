@@ -1,0 +1,9 @@
+{
+  "product": "MP",
+  "propertiesFiles": {
+    "cwd": "./properties",
+    "files": {
+      "mongoose": "mongoose.json"
+    }
+  }
+}

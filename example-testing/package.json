@@ -20,15 +20,16 @@
     "ts-json-properties": "^1.1.1"
   },
   "devDependencies": {
+    "@types/chai": "^3.4.34",
+    "@types/mocha": "^2.2.33",
     "@types/mongoose": "^4.6.1",
     "@types/node": "^6.0.38",
     "@types/passport": "^0.2.34",
     "@types/passport-local": "^1.0.29",
-    "@types/chai": "^3.4.34",
-    "@types/mocha": "^2.2.33",
     "chai": "^3.5.0",
-    "mocha": "^3.1.2",
     "concurrently": "^3.1.0",
-    "nodemon": "^1.11.0"
+    "mocha": "^3.1.2",
+    "nodemon": "^1.11.0",
+    "ts-node": "^3.3.0"
   }
 }

@@ -1,8 +1,11 @@
 {
   "compilerOptions": {
-    "baseUrl":".",
+    "baseUrl": ".",
     "target": "es5",
-    "lib": ["es6", "dom"],
+    "lib": [
+      "es6",
+      "dom"
+    ],
     "types": [
       "reflect-metadata",
       "mocha",
@@ -13,7 +16,7 @@
     ],
     "module": "commonjs",
     "moduleResolution": "node",
-    "experimentalDecorators":true,
+    "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
     "sourceMap": true,
     "declaration": false

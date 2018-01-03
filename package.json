@@ -18,10 +18,10 @@
     "passport": "^0.3.2",
     "passport-local": "^1.0.0",
     "swagger-ui-express": "^2.0.6",
-    "ts-express-decorators": "^2.3.3",
-    "ts-httpexceptions": "^2.2.3",
+    "ts-express-decorators": "^3.0.0",
+    "ts-httpexceptions": "^3.0.0",
     "ts-json-properties": "^1.2.0",
-    "typescript": "^2.4.1"
+    "typescript": "^2.6.2"
   },
   "devDependencies": {
     "@types/chai": "^4.0.1",
@@ -48,16 +48,16 @@
     "sinon-chai": "^2.10.0"
   },
   "scripts": {
-    "install:basic": "cd ./example-basic && npm install && cd ..",
-    "install:https": "cd ./example-https && npm install && cd ..",
-    "install:passp": "cd ./example-passport && npm install && cd ..",
-    "install:servi": "cd ./example-services && npm install && cd ..",
-    "install:testi": "cd ./example-testing && npm install && cd ..",
+    "install:basic": "cd ./example-basic && yarn install && cd ..",
+    "install:https": "cd ./example-https && yarn install && cd ..",
+    "install:passp": "cd ./example-passport && yarn install && cd ..",
+    "install:servi": "cd ./example-services && yarn install && cd ..",
+    "install:testi": "cd ./example-testing && yarn install && cd ..",
     "test": "cd ./example-testing && npm test",
-    "postinstall": "npm run install:basic && npm run install:https && npm run install:passp && npm run install:servi && npm run install:testi",
-    "start:basic": "cd ./example-basic && npm start",
-    "start:passp": "cd ./example-passport && npm start",
-    "start:servi": "cd ./example-services && npm start"
+    "postinstall": "yarn install:basic && yarn install:https && yarn install:passp && yarn install:servi && yarn install:testi",
+    "start:basic": "cd ./example-basic && yarn start",
+    "start:passp": "cd ./example-passport && yarn start",
+    "start:servi": "cd ./example-services && yarn start"
   },
   "repository": {
     "type": "git",

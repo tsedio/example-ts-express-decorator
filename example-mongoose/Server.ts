@@ -14,7 +14,7 @@ const rootDir = Path.resolve(__dirname);
     passport: {},
     httpPort: 8001,
     httpsPort: false,
-    debug: true
+    debug: false
 })
 export class Server extends ServerLoader {
 

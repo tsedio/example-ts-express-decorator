@@ -15,7 +15,7 @@ export class CalendarEventsService {
      * @param model
      */
     private deserialize = (model: any): CalendarEvent =>
-        this.converterService.deserialize(model, CalendarEvent);
+        this.converterService.deserialize(model.toObject && model.toObject() || model, CalendarEvent);
 
 
     /**
@@ -47,7 +47,7 @@ export class CalendarEventsService {
 
         $log.debug({message: "Event saved", event});
 
-        return event;
+        return this.deserialize(eventModel);
     }
 
 

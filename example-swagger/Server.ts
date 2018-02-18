@@ -17,7 +17,7 @@ const rootDir = Path.resolve(__dirname);
     swagger: {
         path: "/api-docs"
     },
-    debug: true
+    debug: false
 })
 export class Server extends ServerLoader {
 

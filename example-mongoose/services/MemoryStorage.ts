@@ -1,4 +1,4 @@
-import {Service} from "ts-express-decorators";
+import {Service} from "@tsed/common";
 
 @Service()
 export class MemoryStorage {

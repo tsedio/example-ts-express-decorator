@@ -1,8 +1,8 @@
-# TsExpressDecorators - Basics usages
+# Ts.ED - Basics usages
 
 Here an example to configure your server and how to create your first controller.
 
-See [TsExpressDecorators](https://github.com/Romakita/ts-express-decorators) project for more information.
+See [Ts.ED](https://romakita.github.io/ts-express-decorators) project for more information.
 
 ## Install
 

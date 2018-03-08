@@ -11,7 +11,7 @@ import {
     Required,
     Status,
     UseBefore
-} from "ts-express-decorators";
+} from "@tsed/common";
 import {Description, Summary} from "ts-express-decorators/lib/swagger";
 import {NotFound} from "ts-httpexceptions";
 import {CheckCalendarIdMiddleware} from "../../middlewares/CheckCalendarId";

@@ -11,7 +11,7 @@ import {
     Required,
     Status,
     UseBefore
-} from "ts-express-decorators";
+} from "@tsed/common";
 import {NotFound} from "ts-httpexceptions";
 import {CheckCalendarIdMiddleware} from "../../middlewares/CheckCalendarId";
 import {CalendarEvent} from "../../models/CalendarEvent";

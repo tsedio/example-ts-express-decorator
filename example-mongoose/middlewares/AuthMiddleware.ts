@@ -1,4 +1,4 @@
-import {EndpointInfo, EndpointMetadata, OverrideMiddleware, Req} from "ts-express-decorators";
+import {EndpointInfo, EndpointMetadata, OverrideMiddleware, Req} from "@tsed/common";
 import {AuthenticatedMiddleware} from "ts-express-decorators/lib/mvc/components/AuthenticatedMiddleware";
 import {Forbidden} from "ts-httpexceptions";
 import {$log} from "ts-log-debug";

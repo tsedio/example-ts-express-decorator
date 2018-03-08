@@ -1,8 +1,8 @@
+import {ExpressApplication} from "@tsed/common";
+import {bootstrap, inject} from "@tsed/testing";
 import {expect} from "chai";
 import * as SuperTest from "supertest";
-import {ExpressApplication} from "ts-express-decorators";
-import {bootstrap, inject} from "ts-express-decorators/testing";
-import {Server} from "../../../../Server";
+import {Server} from "../../../../src/Server";
 
 describe("Passport", () => {
 

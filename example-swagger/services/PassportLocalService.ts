@@ -1,5 +1,3 @@
-import * as Passport from "passport";
-import {Strategy} from "passport-local";
 import {
     AfterRoutesInit,
     BeforeRoutesInit,
@@ -7,7 +5,9 @@ import {
     Inject,
     ServerSettingsService,
     Service
-} from "ts-express-decorators";
+} from "@tsed/common";
+import * as Passport from "passport";
+import {Strategy} from "passport-local";
 import {BadRequest, NotFound} from "ts-httpexceptions";
 import {IUser} from "../interfaces/User";
 import {UsersService} from "./UsersService";

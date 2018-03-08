@@ -1,5 +1,5 @@
+import {GlobalAcceptMimesMiddleware, ServerLoader, ServerSettings} from "@tsed/common";
 import * as Path from "path";
-import {GlobalAcceptMimesMiddleware, ServerLoader, ServerSettings} from "ts-express-decorators";
 import {$log} from "ts-log-debug";
 import {MongooseService} from "./services/MongooseService";
 

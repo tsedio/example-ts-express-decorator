@@ -1,4 +1,4 @@
-import {Service} from "ts-express-decorators";
+import {Service} from "@tsed/common";
 import {IUser} from "../interfaces/User";
 import {MemoryStorage} from "./MemoryStorage";
 

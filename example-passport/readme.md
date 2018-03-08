@@ -1,8 +1,8 @@
-# TsExpressDecorators - Passport
+# Ts.ED - Basics usages
 
-Here an example with a Express Server using `Service` and `Passport.js`.
+Here an example to configure your server and how to create your first controller.
 
-See [TsExpressDecorators](https://github.com/Romakita/ts-express-decorators) project for more information.
+See [Ts.ED](https://romakita.github.io/ts-express-decorators) project for more information.
 
 ## Install
 
@@ -16,4 +16,3 @@ npm install
 ```
 npm start
 ```
-

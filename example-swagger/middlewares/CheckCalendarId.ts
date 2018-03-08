@@ -1,4 +1,4 @@
-import {Middleware, PathParams, Required} from "ts-express-decorators";
+import {Middleware, PathParams, Required} from "@tsed/common";
 import {NotFound} from "ts-httpexceptions";
 import {CalendarsService} from "../services/CalendarsService";
 

@@ -2,11 +2,11 @@
   "compilerOptions": {
     "target": "es2015",
     "lib": [
-      "es6",
+      "es2015",
       "dom"
     ],
-    "types": [
-      "reflect-metadata"
+    "typeRoots": [
+      "./node_modules/@types"
     ],
     "module": "commonjs",
     "moduleResolution": "node",
@@ -15,7 +15,12 @@
     "sourceMap": true,
     "declaration": false
   },
+  "include": [
+    "./src/**/*.ts",
+    "./test/**/*.ts"
+  ],
   "exclude": [
-    "node_modules"
+    "./node_modules",
+    "./public"
   ]
 }

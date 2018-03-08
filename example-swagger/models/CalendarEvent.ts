@@ -1,5 +1,5 @@
+import {JsonProperty} from "@tsed/common";
 import {model, Schema} from "mongoose";
-import {JsonProperty} from "ts-express-decorators";
 import {Description} from "ts-express-decorators/lib/swagger";
 
 export const schema = new Schema({

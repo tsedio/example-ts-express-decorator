@@ -1,8 +1,8 @@
 "use strict";
 
+import {BodyParams, Controller, Post, Req, Required, Res, Status} from "@tsed/common";
 import * as Express from "express";
 import * as Passport from "passport";
-import {BodyParams, Controller, Post, Req, Required, Res, Status} from "ts-express-decorators";
 import {Summary} from "ts-express-decorators/lib/swagger";
 import {BadRequest} from "ts-httpexceptions";
 import {IUser} from "../../interfaces/User";

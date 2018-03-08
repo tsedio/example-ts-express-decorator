@@ -1,4 +1,4 @@
-import {ConverterService, Service} from "ts-express-decorators";
+import {ConverterService, Service} from "@tsed/common";
 import {BadRequest} from "ts-httpexceptions";
 import {$log} from "ts-log-debug/lib";
 import {CalendarEvent, CalendarEventModel} from "../models/CalendarEvent";

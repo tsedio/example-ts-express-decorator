@@ -9,7 +9,7 @@ import {
     Put,
     Required,
     Status
-} from "ts-express-decorators";
+} from "@tsed/common";
 import {Description, Summary} from "ts-express-decorators/lib/swagger";
 import {NotFound} from "ts-httpexceptions";
 import {Calendar} from "../../models/Calendar";
@@ -21,8 +21,8 @@ import {EventCtrl} from "./EventCtrl";
  * The first param is the global path for your controller.
  * The others params is the controller dependencies.
  *
- * In this case, EventCtrl is a dependency of CalendarCtrl.
- * All routes of EventCtrl will be mounted on the `/calendars` path.
+ * In this case, EventsCtrl is a dependency of CalendarCtrl.
+ * All routes of EventsCtrl will be mounted on the `/calendars` path.
  */
 @Controller("/calendars", EventCtrl)
 export class CalendarCtrl {

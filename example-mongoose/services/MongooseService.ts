@@ -1,5 +1,5 @@
+import {Service} from "@tsed/common";
 import * as Mongoose from "mongoose";
-import {Service} from "ts-express-decorators";
 import {Value} from "ts-json-properties";
 import {$log} from "ts-log-debug";
 

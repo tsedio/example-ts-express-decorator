@@ -1,9 +1,18 @@
 import {GlobalAcceptMimesMiddleware, ServerLoader, ServerSettings} from "@tsed/common";
+import "@tsed/swagger";
 import {$log} from "ts-log-debug";
 
 @ServerSettings({
     rootDir: __dirname,
-    acceptMimes: ["application/json"]
+    acceptMimes: ["application/json"],
+    logger: {
+        debug: false,
+        logRequest: true,
+        requestFields: ["reqId", "method", "url", "headers", "query", "params", "duration"]
+    },
+    swagger: {
+        path: "/api-docs"
+    }
 })
 export class Server extends ServerLoader {
 

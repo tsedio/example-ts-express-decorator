@@ -21,7 +21,9 @@
   "dependencies": {
     "@tsed/common": "^4.4.1",
     "@tsed/core": "^4.4.1",
+    "@tsed/swagger": "^4.4.1",
     "@tsed/testing": "^4.4.1",
+    "@types/swagger-schema-official": "^2.0.9",
     "body-parser": "^1.18.2",
     "compression": "^1.7.1",
     "concurrently": "^3.5.1",
@@ -29,6 +31,7 @@
     "express": "^4.16.2",
     "method-override": "^2.3.10",
     "serve-static": "^1.13.1",
+    "swagger-ui-express": "^2.0.15",
     "ts-json-properties": "1.2.0"
   },
   "devDependencies": {

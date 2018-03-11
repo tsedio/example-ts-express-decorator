@@ -1,19 +1,21 @@
-# TsExpressDecorators - Passport
+# Ts.ED - Mongoose
 
-Here an example with a Express Server using `Service` and `Passport.js`.
+Here an example to configure your server and how to create your first controller.
 
-See [TsExpressDecorators](https://github.com/Romakita/ts-express-decorators) project for more information.
+See [Ts.ED](https://romakita.github.io/ts-express-decorators) project for more information.
 
 ## Install
 
-> **Important!** TsExpressDecorators requires Node >= 4, Express >= 4 and TypeScript >= 2.0.
+> **Important!** Ts.ED requires Node >= 6, Express >= 4 and TypeScript >= 2.7.
 
 ```batch
 npm install
 ```
 
 ## Run
+
 ```
+mkdir mongodb
+npm run start:db
 npm start
 ```
-

@@ -6,7 +6,7 @@ See [Ts.ED](https://romakita.github.io/ts-express-decorators) project for more i
 
 ## Install
 
-> **Important!** TsExpressDecorators requires Node >= 4, Express >= 4 and TypeScript >= 2.0.
+> **Important!** Ts.ED requires Node >= 6, Express >= 4 and TypeScript >= 2.7.
 
 ```batch
 npm install

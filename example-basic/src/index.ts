@@ -3,5 +3,5 @@ import {Server} from "./Server";
 
 $log.debug("Start server...");
 new Server().start().catch((er) => {
-    console.error(er);
+    $log.error(er);
 });

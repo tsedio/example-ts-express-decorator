@@ -12,7 +12,10 @@ import {$log} from "ts-log-debug";
     },
     swagger: {
         path: "/api-docs"
-    }
+    },
+  calendar: {
+    token: true
+  }
 })
 export class Server extends ServerLoader {
 

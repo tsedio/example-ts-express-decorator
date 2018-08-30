@@ -1,19 +1,24 @@
-import {Allow, Required} from "@tsed/common";
-import {Column, Entity, ObjectIdColumn} from "typeorm";
+import {Minimum, Required} from "@tsed/common";
+import {Example} from "@tsed/swagger";
+import {Column, Entity, PrimaryGeneratedColumn} from "typeorm";
 
-@Entity("User")
+@Entity()
 export class User {
 
-  @ObjectIdColumn()
+  @PrimaryGeneratedColumn()
   id: number;
 
-  @Required()
-  @Allow("", null)
   @Column()
-  email: string;
+  @Required()
+  firstName: string;
 
-  @Required()
-  @Allow("", null)
   @Column()
-  password: string;
+  @Required()
+  lastName: string;
+
+  @Column()
+  @Minimum(18)
+  @Example(18)
+  age: number;
+
 }

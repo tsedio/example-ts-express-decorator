@@ -6,9 +6,28 @@ import "@tsed/typeorm";
   rootDir: __dirname,
   acceptMimes: ["application/json"],
   passport: {},
-  typeorm: {
-    db1: require("../ormconfig.json")
-  },
+  typeorm: [
+    {
+      name: "default",
+      type: "postgres",
+      host: "localhost",
+      port: 5432,
+      username: "postgres",
+      password: "",
+      database: "testdb",
+      synchronize: true,
+      logging: false,
+      entities: [
+        `${__dirname}/entity/*{.ts,.js}`
+      ],
+      migrations: [
+        `${__dirname}/migrations/*{.ts,.js}`
+      ],
+      subscribers: [
+        `${__dirname}/subscriber/*{.ts,.js}`
+      ]
+    }
+  ],
   swagger: {
     path: "/api-docs"
   },

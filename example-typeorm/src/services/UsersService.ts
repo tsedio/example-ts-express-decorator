@@ -8,28 +8,22 @@ export class UsersService {
   private connection: Connection;
 
   constructor(private typeORMService: TypeORMService) {
-
   }
 
   $afterRoutesInit() {
-    this.connection = this.typeORMService.get("db1");
+    this.connection = this.typeORMService.get();
+    console.log("this.connection", this.connection);
   }
 
   async create(user: User): Promise<User> {
-    try {
-      console.log(user);
-      // Then save
-      await this.connection.mongoManager.save(user);
-      console.log("Saved a new user with id: " + user.id);
+    await this.connection.manager.save(user);
+    console.log("Saved a new user with id: " + user.id);
 
-      return user;
-    } catch (er) {
-      console.error(er);
-    }
+    return user;
   }
 
   async find(): Promise<User[]> {
-    const users = await this.connection.mongoManager.find(User);
+    const users = await this.connection.manager.find(User);
     console.log("Loaded users: ", users);
 
     return users;

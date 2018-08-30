@@ -1,0 +1,22 @@
+{
+  "type": "mongodb",
+  "database": "example-mongoose-test",
+  "host": "localhost",
+  "port": 27017,
+  "synchronize": true,
+  "logging": true,
+  "entities": [
+    "src/entity/**/*.ts"
+  ],
+  "migrations": [
+    "src/migration/**/*.ts"
+  ],
+  "subscribers": [
+    "src/subscriber/**/*.ts"
+  ],
+  "cli": {
+    "entitiesDir": "src/entity",
+    "migrationsDir": "src/migration",
+    "subscribersDir": "src/subscriber"
+  }
+}

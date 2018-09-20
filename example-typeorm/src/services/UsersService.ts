@@ -12,7 +12,7 @@ export class UsersService {
 
   $afterRoutesInit() {
     this.connection = this.typeORMService.get();
-    console.log("this.connection", this.connection);
+    console.log("this.connection =>", this.connection);
   }
 
   async create(user: User): Promise<User> {

@@ -6,6 +6,13 @@ import "@tsed/typeorm";
   rootDir: __dirname,
   acceptMimes: ["application/json"],
   passport: {},
+  mount: {
+    '/v1': `${__dirname}/controllers/**/**.controller.{ts,js}`
+  },
+  componentsScan: [
+    `${__dirname}/middlewares/**/**.{ts,js}`,
+    `${__dirname}/services/**/**.{ts,js}`,
+  ],
   typeorm: [
     {
       name: "default",

@@ -7,11 +7,11 @@ import "@tsed/typeorm";
   acceptMimes: ["application/json"],
   passport: {},
   mount: {
-    '/v1': `${__dirname}/controllers/**/**.controller.{ts,js}`
+    '/v1': `${__dirname}/controllers/**/*.ctrl.{ts,js}`
   },
   componentsScan: [
-    `${__dirname}/middlewares/**/**.{ts,js}`,
-    `${__dirname}/services/**/**.{ts,js}`,
+    `${__dirname}/middlewares/**/*.middleware.{ts,js}`,
+    `${__dirname}/services/**/*.service.{ts,js}`,
   ],
   typeorm: [
     {
@@ -38,7 +38,7 @@ import "@tsed/typeorm";
   swagger: {
     path: "/api-docs"
   },
-  debug: false
+  debug: true
 })
 export class Server extends ServerLoader {
   /**

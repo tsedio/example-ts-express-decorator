@@ -1,5 +1,4 @@
-import {BodyParams, Controller, Post} from "@tsed/common";
-import {Get} from "@tsed/common/mvc/decorators/method/route";
+import {BodyParams, Controller, Post, Get} from "@tsed/common";
 import {User} from "../../entity/User";
 import {UsersService} from "../../services/UsersService";
 

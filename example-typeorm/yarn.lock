@@ -95,9 +95,9 @@
   dependencies:
     samsam "1.3.0"
 
-"@tsed/common@^4.30.1":
-  version "4.30.2"
-  resolved "https://registry.yarnpkg.com/@tsed/common/-/common-4.30.2.tgz#a2c3199ace7b8a2ebf5a471f4eabe1deab9e1a3b"
+"@tsed/common@^4.30.6":
+  version "4.31.8"
+  resolved "https://registry.yarnpkg.com/@tsed/common/-/common-4.31.8.tgz#cd51b0988f7abab5ee57f915492ae0e9248db0ab"
   dependencies:
     "@types/json-schema" "^6.0.1"
     globby "^8.0.1"
@@ -106,31 +106,31 @@
     ts-log-debug "^4.0.1"
     tslib "^1.9.0"
 
-"@tsed/core@^4.30.1":
-  version "4.30.2"
-  resolved "https://registry.yarnpkg.com/@tsed/core/-/core-4.30.2.tgz#b5d8057d6b6efd4b12ef540c2f9927981e649d98"
+"@tsed/core@^4.30.6":
+  version "4.31.8"
+  resolved "https://registry.yarnpkg.com/@tsed/core/-/core-4.31.8.tgz#6a3b31a13fc433fe80a8f147ec33f34b349b97f5"
   dependencies:
     reflect-metadata "^0.1.12"
     source-map-support "^0.5.3"
     tslib "^1.8.0"
 
-"@tsed/swagger@^4.30.1":
-  version "4.30.2"
-  resolved "https://registry.yarnpkg.com/@tsed/swagger/-/swagger-4.30.2.tgz#eb76f18486368780dd643dd86b9d15977191e9b4"
+"@tsed/swagger@^4.30.6":
+  version "4.31.8"
+  resolved "https://registry.yarnpkg.com/@tsed/swagger/-/swagger-4.31.8.tgz#91f39d65d99a5b048be73e8ad0a4e8792a8d0f0b"
   dependencies:
     ejs "^2.5.9"
     swagger-ui-dist "^3.13.6"
     tslib "^1.9.0"
 
-"@tsed/testing@^4.30.1":
-  version "4.30.2"
-  resolved "https://registry.yarnpkg.com/@tsed/testing/-/testing-4.30.2.tgz#c9957142d8369ec6844cb8aaec24bc631c1acb22"
+"@tsed/testing@^4.30.6":
+  version "4.31.8"
+  resolved "https://registry.yarnpkg.com/@tsed/testing/-/testing-4.31.8.tgz#6ba3d479e1a97cd92939b1488c07378240910125"
   dependencies:
     tslib "^1.9.0"
 
-"@tsed/typeorm@^4.30.3":
-  version "4.30.3"
-  resolved "https://registry.yarnpkg.com/@tsed/typeorm/-/typeorm-4.30.3.tgz#c08863bfc0e7429ce6e89fe0d8e0da12c39173bc"
+"@tsed/typeorm@^4.30.6":
+  version "4.31.8"
+  resolved "https://registry.yarnpkg.com/@tsed/typeorm/-/typeorm-4.31.8.tgz#9a6990206b44d62b953d67df44408eac72aee899"
   dependencies:
     tslib "^1.9.0"
     typeorm "^0.2.7"
@@ -585,6 +585,10 @@ browser-stdout@1.3.1:
 bson@^1.1.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/bson/-/bson-1.1.0.tgz#bee57d1fb6a87713471af4e32bcae36de814b5b0"
+
+buffer-writer@1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/buffer-writer/-/buffer-writer-1.0.1.tgz#22a936901e3029afcd7547eb4487ceb697a3bf08"
 
 buffer@^5.1.0:
   version "5.2.0"
@@ -2498,6 +2502,10 @@ package-json@^4.0.0:
     registry-url "^3.0.3"
     semver "^5.1.0"
 
+packet-reader@0.3.1:
+  version "0.3.1"
+  resolved "https://registry.yarnpkg.com/packet-reader/-/packet-reader-0.3.1.tgz#cd62e60af8d7fea8a705ec4ff990871c46871f27"
+
 parent-require@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/parent-require/-/parent-require-1.0.0.tgz#746a167638083a860b0eef6732cb27ed46c32977"
@@ -2611,6 +2619,41 @@ performance-now@^0.2.0:
   version "0.2.0"
   resolved "https://registry.yarnpkg.com/performance-now/-/performance-now-0.2.0.tgz#33ef30c5c77d4ea21c5a53869d91b56d8f2555e5"
 
+pg-connection-string@0.1.3:
+  version "0.1.3"
+  resolved "https://registry.yarnpkg.com/pg-connection-string/-/pg-connection-string-0.1.3.tgz#da1847b20940e42ee1492beaf65d49d91b245df7"
+
+pg-pool@~2.0.3:
+  version "2.0.3"
+  resolved "https://registry.yarnpkg.com/pg-pool/-/pg-pool-2.0.3.tgz#c022032c8949f312a4f91fb6409ce04076be3257"
+
+pg-types@~1.12.1:
+  version "1.12.1"
+  resolved "https://registry.yarnpkg.com/pg-types/-/pg-types-1.12.1.tgz#d64087e3903b58ffaad279e7595c52208a14c3d2"
+  dependencies:
+    postgres-array "~1.0.0"
+    postgres-bytea "~1.0.0"
+    postgres-date "~1.0.0"
+    postgres-interval "^1.1.0"
+
+pg@^7.4.3:
+  version "7.4.3"
+  resolved "https://registry.yarnpkg.com/pg/-/pg-7.4.3.tgz#f7b6f93f5340ecc2596afbb94a13e3d6b609834b"
+  dependencies:
+    buffer-writer "1.0.1"
+    packet-reader "0.3.1"
+    pg-connection-string "0.1.3"
+    pg-pool "~2.0.3"
+    pg-types "~1.12.1"
+    pgpass "1.x"
+    semver "4.3.2"
+
+pgpass@1.x:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/pgpass/-/pgpass-1.0.2.tgz#2a7bb41b6065b67907e91da1b07c1847c877b306"
+  dependencies:
+    split "^1.0.0"
+
 pify@^2.0.0:
   version "2.3.0"
   resolved "https://registry.yarnpkg.com/pify/-/pify-2.3.0.tgz#ed141a6ac043a849ea588498e7dca8b15330e90c"
@@ -2638,6 +2681,24 @@ pkg-dir@^1.0.0:
 posix-character-classes@^0.1.0:
   version "0.1.1"
   resolved "https://registry.yarnpkg.com/posix-character-classes/-/posix-character-classes-0.1.1.tgz#01eac0fe3b5af71a2a6c02feabb8c1fef7e00eab"
+
+postgres-array@~1.0.0:
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/postgres-array/-/postgres-array-1.0.3.tgz#c561fc3b266b21451fc6555384f4986d78ec80f5"
+
+postgres-bytea@~1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/postgres-bytea/-/postgres-bytea-1.0.0.tgz#027b533c0aa890e26d172d47cf9ccecc521acd35"
+
+postgres-date@~1.0.0:
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/postgres-date/-/postgres-date-1.0.3.tgz#e2d89702efdb258ff9d9cee0fe91bd06975257a8"
+
+postgres-interval@^1.1.0:
+  version "1.1.2"
+  resolved "https://registry.yarnpkg.com/postgres-interval/-/postgres-interval-1.1.2.tgz#bf71ff902635f21cb241a013fc421d81d1db15a9"
+  dependencies:
+    xtend "^4.0.0"
 
 prepend-http@^1.0.1:
   version "1.0.4"
@@ -2909,6 +2970,10 @@ semver-diff@^2.0.0:
   version "5.5.0"
   resolved "https://registry.yarnpkg.com/semver/-/semver-5.5.0.tgz#dc4bbc7a6ca9d916dee5d43516f0092b58f7b8ab"
 
+semver@4.3.2:
+  version "4.3.2"
+  resolved "https://registry.yarnpkg.com/semver/-/semver-4.3.2.tgz#c7a07158a80bedd052355b770d82d6640f803be7"
+
 send@0.16.2:
   version "0.16.2"
   resolved "https://registry.yarnpkg.com/send/-/send-0.16.2.tgz#6ecca1e0f8c156d141597559848df64730a6bbc1"
@@ -3130,6 +3195,12 @@ split@0.3:
   dependencies:
     through "2"
 
+split@^1.0.0:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/split/-/split-1.0.1.tgz#605bd9be303aa59fb35f9229fbea0ddec9ea07d9"
+  dependencies:
+    through "2"
+
 sprintf-js@~1.0.2:
   version "1.0.3"
   resolved "https://registry.yarnpkg.com/sprintf-js/-/sprintf-js-1.0.3.tgz#04e6926f662895354f3dd015203633b857297e2c"
@@ -3286,10 +3357,6 @@ supports-color@^5.2.0, supports-color@^5.3.0:
 swagger-ui-dist@^3.13.6:
   version "3.17.0"
   resolved "https://registry.yarnpkg.com/swagger-ui-dist/-/swagger-ui-dist-3.17.0.tgz#3e39cd67899d734489d664c3c4a75bf3569e56a9"
-
-swagger-ui-express@^3.0.9:
-  version "3.0.9"
-  resolved "https://registry.yarnpkg.com/swagger-ui-express/-/swagger-ui-express-3.0.9.tgz#e92aac29db638c4317e2d872ef215f330a693f57"
 
 tar-pack@^3.4.0:
   version "3.4.1"
@@ -3710,6 +3777,10 @@ xml2js@^0.4.17:
 xmlbuilder@~9.0.1:
   version "9.0.7"
   resolved "https://registry.yarnpkg.com/xmlbuilder/-/xmlbuilder-9.0.7.tgz#132ee63d2ec5565c557e20f4c22df9aca686b10d"
+
+xtend@^4.0.0:
+  version "4.0.1"
+  resolved "https://registry.yarnpkg.com/xtend/-/xtend-4.0.1.tgz#a5c6d532be656e23db820efb943a1f04998d63af"
 
 y18n@^3.2.1:
   version "3.2.1"

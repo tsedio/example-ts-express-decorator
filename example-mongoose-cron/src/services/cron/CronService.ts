@@ -4,7 +4,7 @@ import {CalendarsService} from "../calendars/CalendarsService";
 @Service()
 export class CronService {
   constructor(private calendarsService: CalendarsService) {
-
+      console.log('CRONSERVICE')
   }
 
   async $onCronReady() {

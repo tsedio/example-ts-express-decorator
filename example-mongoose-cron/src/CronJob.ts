@@ -1,5 +1,6 @@
 import {ServerLoader, ServerSettings} from "@tsed/common";
 import {$log} from "ts-log-debug";
+import * as path from "path";
 
 @ServerSettings({
   rootDir: __dirname,
@@ -11,6 +12,7 @@ import {$log} from "ts-log-debug";
 })
 export class CronJob extends ServerLoader {
   async start() {
+    $log.start();
     const start = new Date();
     await this.loadSettingsAndInjector();
     await this.injector.emit("$onCronReady"); // create a custom hook (event) for your services

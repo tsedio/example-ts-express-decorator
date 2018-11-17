@@ -7,7 +7,7 @@ import "@tsed/typeorm";
   acceptMimes: ["application/json"],
   passport: {},
   mount: {
-    '/v1': `${__dirname}/controllers/**/**.controller.{ts,js}`
+    '/v1': `${__dirname}/controllers/**/**Ctrl.{ts,js}`
   },
   componentsScan: [
     `${__dirname}/middlewares/**/**.{ts,js}`,
